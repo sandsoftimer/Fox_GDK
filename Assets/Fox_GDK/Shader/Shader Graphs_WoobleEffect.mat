@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-4958754501211508200
+--- !u!114 &-737012651944089490
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
@@ -11,7 +11,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Editor::UnityEditor.Rendering.Universal.AssetVersion
   version: 10
 --- !u!21 &2100000
 Material:
@@ -20,14 +20,13 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Shader Graphs_Water_Shader
-  m_Shader: {fileID: -6465566751694194690, guid: 4337d7562e59448d985bff6f38dc4478, type: 3}
+  m_Name: Shader Graphs_WoobleEffect
+  m_Shader: {fileID: -6465566751694194690, guid: 105ee27eb0d60e6499f18713ed1b867e, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
-  m_InvalidKeywords:
-  - _EMISSION
-  m_LightmapFlags: 2
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
@@ -38,6 +37,10 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - _TopTex:
+        m_Texture: {fileID: 2800000, guid: 8f8985c713f5e4763a543ee9a574ec06, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -52,19 +55,14 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Density: 10
-    - _FoamRoughness: 12
-    - _FoamSpeed: 0.025
-    - _FoamThikness: -0.54
-    - _Power: 12
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _WaterScale: 2
-    - _WaveSpeed: 0.25
+    - _WoobleAmount: 0.5
+    - _WoobleX: 0
+    - _WoobleZ: 0
     - _XRMotionVectorsPass: 1
     m_Colors:
-    - _BaseColor: {r: 0.082352914, g: 0.9843137, b: 0.7997559, a: 0.31764707}
-    - _FoamColor: {r: 0, g: 0.4392157, b: 1, a: 1}
-    - _ShineColor: {r: 1.4752367, g: 1.9396423, b: 1.2717466, a: 0}
+    - _LiquidColor: {r: 0.4716981, g: 0.01756896, b: 0, a: 1}
+    - _TopColor: {r: 1, g: 0, b: 0, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
