@@ -1,0 +1,183 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1302358689249635625
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2599940208417666126}
+  - component: {fileID: 3073796434144560779}
+  - component: {fileID: 4297626353190002779}
+  m_Layer: 5
+  m_Name: VFXImage
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &2599940208417666126
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1302358689249635625}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 2312438533412803431}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 256, y: 256}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &3073796434144560779
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1302358689249635625}
+  m_CullTransparentMesh: 1
+--- !u!114 &4297626353190002779
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1302358689249635625}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 8b558b23b8418a0479cbe63a10623edc, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!1 &6582623676883984323
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2312438533412803431}
+  - component: {fileID: 5934561270974309930}
+  m_Layer: 5
+  m_Name: ComboController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &2312438533412803431
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6582623676883984323}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 2599940208417666126}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &5934561270974309930
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6582623676883984323}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9eab6cdb4f6627a43839d24850765979, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  foxManager: {fileID: 0}
+  FoxTools: {fileID: 0}
+  gameplayData:
+    numberOfSlot: 2
+    hammerRemaining: 0
+    magnetRemaining: 0
+    goalRemaining: 0
+    dockRemaining: 0
+    previousLevelCoinConsumed: 0
+    isContinueLevel: 0
+    directStart: 1
+    is_AD_Purchased: 0
+    noAd_Product_hasReceipt: 0
+    noAdBundle_Product_hasReceipt: 0
+    starter_Product_hasReceipt: 0
+    Is_Game_Busy_By_Booster: 0
+    Is_Hammer_Tap_Mood: 0
+    Is_Magnet_Tap_Mood: 0
+    gameScore: 0
+    currentLevelNumber: 0
+    retryAttemptNumber: 1
+    reviveAttemptNumber: 1
+    softFailAttemptNumber: 1
+    commonAttempt: 1
+    gameStartTime: 0
+    gameEndTime: 0
+    totalLevelCompletedTime: 0
+    totalCoin: 0
+    healthBaseValue: 100
+    healthValueIncreaser: 20
+    healthUpgradeLevel: 0
+    damageBaseValue: 10
+    damageValueIncreaser: 2
+    damageUpgradeLevel: 0
+    gameoverSuccess: 0
+    soundEffectOn: 1
+    backgroundMusicOn: 1
+    vibrationEffectOn: 1
+    tutorial_Tap_Blocker: 0
+    current_Level_Data: {fileID: 0}
+  gameState: 0
+  comboUIPrefab: {fileID: 7271798681828909086, guid: 1b98580f16c4d7f44ac211802cad6d3f, type: 3}
+  vfxImage: {fileID: 4297626353190002779}
+  comboTime: 2
+  fadingHeight: 150
+  fadingTime: 2
+  comboFontVFX:
+  - {fileID: 21300000, guid: 8b558b23b8418a0479cbe63a10623edc, type: 3}
+  - {fileID: 21300000, guid: c6eccd2e61c6a61408470b6e0f10ae42, type: 3}
+  - {fileID: 21300000, guid: 57c02604798066e47a443560e54dd8bc, type: 3}
+  - {fileID: 21300000, guid: d8d5996570faff1438e6f18f45d5ae1b, type: 3}
+  - {fileID: 21300000, guid: b096ebdaecdafbe4bbb806919db70a30, type: 3}
+  - {fileID: 21300000, guid: dbe365af9f89a7b4abd8530a825c3eaf, type: 3}
+  - {fileID: 21300000, guid: 3ce33e55dd92b454996821a150c380ed, type: 3}
+  - {fileID: 21300000, guid: eb27f47bce128644ab883d4698f75380, type: 3}
+  - {fileID: 21300000, guid: d12003bb053c9be478e321352f9b7257, type: 3}
+  debugMood: 0

@@ -1,0 +1,73 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1707ca83307a1b04cbd2fca9819ded3d, type: 3}
+  m_Name: Constant Manager
+  m_EditorClassIdentifier: 
+  SCENE_LOOPING_TYPE: 1
+  TOTAL_GAME_LEVELS: 40
+  SCENE_LOOPING_STARTING_INDEX: 16
+  BASIC_TUTORIAL_LEVEL: 1
+  MARGE_TUTORIAL_LEVEL: 5
+  HIDDEN_HOLES_TUTORIAL_LEVEL: 8
+  HIDDEN_BLOCK_TUTORIAL_LEVEL: 13
+  SQURE_HOLES_TUTORIAL_LEVEL: 3
+  MULTISTORIED_TUTORIAL_LEVEL: 17
+  FROZEN_TUTORIAL_LEVEL: 20
+  TRIANGLE_HOLES_TUTORIAL_LEVEL: 22
+  CONNECTED_HOLES_TUTORIAL_LEVEL: 27
+  MAGNET_UNLOCK_LEVEL_NUMBER: 15
+  DOCK_UNLOCK_LEVEL_NUMBER: 11
+  HAMMER_UNLOCK_LEVEL_NUMBER: -1
+  GOAL_UNLOCK_LEVEL_NUMBER: -1
+  sceneSupportCount: 1
+  hardEnvironmentData:
+    _name: Environmnet 2
+    arrowMat: {fileID: 2100000, guid: 07908481a503c31488983acd6e6ade31, type: 2}
+    cubeSpawnerMat: {fileID: 2100000, guid: 7fa353ba97a52be438209d1b16b0239a, type: 2}
+    holeSpawnerBorderMat: {fileID: 2100000, guid: d2baf54a78a440a49aab1da0bcc7e21e, type: 2}
+    holeSpawnerMainMat: {fileID: 2100000, guid: 255884e660cc84d4cbab601fec3efd0e, type: 2}
+    conveyorBorderMat: {fileID: 2100000, guid: 61a1328a65ff67f4faa2a7d3ff3164d8, type: 2}
+    conveyorMainMat: {fileID: 2100000, guid: 1eebabfbef7ae9448890a0b8ecedfc16, type: 2}
+    floorMat: {fileID: 2100000, guid: e943acad92cd4a3418659de4f871611f, type: 2}
+  regularEnvironmentDatas:
+  - _name: Environmnet 1
+    arrowMat: {fileID: 2100000, guid: 2ac7ebe48c012d8419cc339ac1c4a31c, type: 2}
+    cubeSpawnerMat: {fileID: 2100000, guid: 0732944707736ad42a4873e8560c7bf9, type: 2}
+    holeSpawnerBorderMat: {fileID: 2100000, guid: 6117b2ee15a6ec444b98c61c4c65b87d, type: 2}
+    holeSpawnerMainMat: {fileID: 2100000, guid: e01a2f404e1419b46aed444b9a585216, type: 2}
+    conveyorBorderMat: {fileID: 2100000, guid: 776c35f79b01d1e4ea9a065996c1a5b0, type: 2}
+    conveyorMainMat: {fileID: 2100000, guid: 2fcf58b30fc0a7646b690d3c5234c395, type: 2}
+    floorMat: {fileID: 2100000, guid: 8e3f30e3801f77a49ac09d28ed8ab869, type: 2}
+  - _name: Environmnet 3
+    arrowMat: {fileID: 2100000, guid: 49a22d79eafbaf64c983af63b95c092c, type: 2}
+    cubeSpawnerMat: {fileID: 2100000, guid: 6ffb36927734d9148a6c796266741f46, type: 2}
+    holeSpawnerBorderMat: {fileID: 2100000, guid: 9dec5b974de5f114392cb3c2263e8c78, type: 2}
+    holeSpawnerMainMat: {fileID: 2100000, guid: 57c0b501efc73614780b47314d52a61a, type: 2}
+    conveyorBorderMat: {fileID: 2100000, guid: e78e6af1ea1178c47a1b1406c3583886, type: 2}
+    conveyorMainMat: {fileID: 2100000, guid: e1513468df61b214d84046376405b25e, type: 2}
+    floorMat: {fileID: 2100000, guid: 4c959646152fcb14f881b746305de5de, type: 2}
+  - _name: Environmnet 4
+    arrowMat: {fileID: 2100000, guid: c9112fc9e3866624a8178df4f252b398, type: 2}
+    cubeSpawnerMat: {fileID: 2100000, guid: 0f2b5db1a15d15844b004be927f8f50a, type: 2}
+    holeSpawnerBorderMat: {fileID: 2100000, guid: 3aebd7c4028ebd149aa3ecb79353d9f2, type: 2}
+    holeSpawnerMainMat: {fileID: 2100000, guid: 1c75ba5592a61564596f4291df838587, type: 2}
+    conveyorBorderMat: {fileID: 2100000, guid: 30caf87c187f4da42b078570cc09b612, type: 2}
+    conveyorMainMat: {fileID: 2100000, guid: 1f5e6a2e75acdf64e9d5668c9af824fc, type: 2}
+    floorMat: {fileID: 2100000, guid: 093b5df67b946954c91897d7f1ca54f1, type: 2}
+  - _name: Environmnet 5
+    arrowMat: {fileID: 2100000, guid: 7f40c2768e9460d4bbb08866370121f3, type: 2}
+    cubeSpawnerMat: {fileID: 2100000, guid: 9ccb6a2e09316c1469673f916ce232bc, type: 2}
+    holeSpawnerBorderMat: {fileID: 2100000, guid: cd7e37b644625d2428410c397b00be9c, type: 2}
+    holeSpawnerMainMat: {fileID: 2100000, guid: 7ce59dbaa3bcc014b82f2fc9557644ab, type: 2}
+    conveyorBorderMat: {fileID: 2100000, guid: 95deafb4f57d19041acfb51cf5ccf595, type: 2}
+    conveyorMainMat: {fileID: 2100000, guid: 9fae982dc4503734f99ef2e8b46d0ff5, type: 2}
+    floorMat: {fileID: 2100000, guid: 48732dd73c1c6e64f8e23f631c74187d, type: 2}

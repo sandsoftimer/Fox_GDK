@@ -1,0 +1,63 @@
+#region FOX EDITOR MAKER
+#if UNITY_EDITOR
+using UnityEditor;
+using UnityEngine;
+
+[CustomEditor(typeof(#SCRIPTNAME#))]
+public class #SCRIPTNAME#Editor : FoxEditor
+{
+    private #SCRIPTNAME# targetScript;
+
+    // All SerializedProperties
+    #region ALL_PUBLIC_PROPERTIES
+    #endregion ALL_PUBLIC_PROPERTIES
+
+    bool drawProperties = true;
+    public void OnEnable()
+    {
+        targetScript = (#SCRIPTNAME#)target;
+        #region FINDER_ALL_PUBLIC_PROPERTIES
+        #endregion FINDER_ALL_PUBLIC_PROPERTIES
+    }
+
+    public override void OnInspectorGUI()
+    {
+        serializedObject.Update();
+
+        if (drawProperties)
+        {
+            #region DrawProperty(propertyName)
+            #endregion DrawProperty(propertyName)
+        }
+
+        if (!drawProperties)
+        {
+            Space();
+            DrawHorizontalLine();
+            OnButtonPressed("Draw Properties",
+                () =>
+                {
+                    drawProperties = !drawProperties;
+                });
+        }
+        else
+        {
+            Space();
+            DrawHorizontalLine();
+            OnButtonPressed("Hide Properties",
+                () =>
+                {
+                    drawProperties = !drawProperties;
+                },
+                new EditorButtonStyle
+                {
+                    buttonColor = Color.yellow,
+                    buttonTextColor = Color.red
+                });
+        }
+
+        serializedObject.ApplyModifiedProperties();
+    }
+}
+#endif
+#endregion FOX EDITOR MAKER

@@ -1,0 +1,62 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+#if Fox_GAMEANALYTICS_SDK_INSTALLED
+using GameAnalyticsSDK;
+#endif
+
+
+public class #SCRIPTNAME# : FoxManager
+{
+    public override void Awake()
+    {
+        base.Awake();
+
+        ChangeGameState(GameState.GAME_INITIALIZED);
+    }
+    
+    public override void Start()
+    {
+        base.Start();
+
+        gameStartingUI.Set_Visual(true);
+    }
+
+    public override void GameStart()
+    {
+        base.GameStart();
+        
+        gameStartingUI.Set_Visual(false);
+        gamePlayUI.Set_Visual(true);
+
+#if MOONEE_SDK_INSTALLED
+        MoonSDK.SendLevelDataStartEvent(gameplayData.currentLevelNumber + 1, (int)coinSystem.REMAINING_CURRENCY, null);
+#endif
+
+    }
+
+    public override void GameOver()
+    {
+        base.GameOver();
+        
+        gamePlayUI.Set_Visual(false);
+        if (gameplayData.gameoverSuccess)
+        {
+            gameSuccessUI.Set_Visual(true);
+
+#if MOONEE_SDK_INSTALLED
+            MoonSDK.SendLevelDataCompleteEvent(LevelStatus.complete, gameplayData.currentLevelNumber, LevelResult.win, false, (int)coinSystem.REMAINING_CURRENCY);
+#endif
+        }
+        else
+        {
+            gameFaildUI.Set_Visual(true);
+
+#if MOONEE_SDK_INSTALLED
+            MoonSDK.SendLevelDataCompleteEvent(LevelStatus.fail, gameplayData.currentLevelNumber + 1, LevelResult.fail, false, (int)coinSystem.REMAINING_CURRENCY);
+#endif
+        }
+
+    }
+}
