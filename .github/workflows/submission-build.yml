@@ -1,4 +1,4 @@
-name: Submission Build - Build completed  2
+name: Submission Build - Artifact v4 added
 
 on:
   workflow_dispatch:
@@ -43,7 +43,7 @@ jobs:
         versioning: Custom
         version: ${{ github.event.inputs.version }}
     
-    - uses: actions/upload-artifact@v3
+    - uses: actions/upload-artifact@v4
       with:
         name: submission-build-${{ matrix.targetPlatform }}-${{ github.event.inputs.version }}
         path: build/${{ matrix.targetPlatform }}

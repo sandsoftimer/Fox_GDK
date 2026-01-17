@@ -96,7 +96,7 @@ jobs:
         targetPlatform: ${{{{ matrix.targetPlatform }}}}
         buildMethod: UnityBuilderAction.BuildScript.Build
     
-    - uses: actions/upload-artifact@v3
+    - uses: actions/upload-artifact@v4
       with:
         name: test-build-${{{{ matrix.targetPlatform }}}}
         path: build/${{{{ matrix.targetPlatform }}}}";
@@ -146,7 +146,7 @@ jobs:
         versioning: Custom
         version: ${{{{ github.event.inputs.version }}}}
     
-    - uses: actions/upload-artifact@v3
+    - uses: actions/upload-artifact@v4
       with:
         name: submission-build-${{{{ matrix.targetPlatform }}}}-${{{{ github.event.inputs.version }}}}
         path: build/${{{{ matrix.targetPlatform }}}}";

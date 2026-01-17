@@ -1,4 +1,4 @@
-name: Test Build - Build completed  2
+name: Test Build - Artifact v4 added
 
 on:
   push:
@@ -39,7 +39,7 @@ jobs:
         targetPlatform: ${{ matrix.targetPlatform }}
         buildMethod: UnityBuilderAction.BuildScript.Build
     
-    - uses: actions/upload-artifact@v3
+    - uses: actions/upload-artifact@v4
       with:
         name: test-build-${{ matrix.targetPlatform }}
         path: build/${{ matrix.targetPlatform }}
