@@ -92,10 +92,6 @@ jobs:
         restore-keys: |
           Library-
     
-    - name: Setup Android SDK
-      if: matrix.targetPlatform == 'Android'
-      uses: android-actions/setup-android@v3
-    
     - uses: game-ci/unity-builder@v4
       env:
         UNITY_LICENSE: ${{{{ secrets.UNITY_LICENSE }}}}
@@ -153,10 +149,6 @@ jobs:
         key: Library-${{{{ hashFiles('Assets/**', 'Packages/**', 'ProjectSettings/**') }}}}
         restore-keys: |
           Library-
-    
-    - name: Setup Android SDK
-      if: matrix.targetPlatform == 'Android'
-      uses: android-actions/setup-android@v3
     
     - uses: game-ci/unity-builder@v4
       env:

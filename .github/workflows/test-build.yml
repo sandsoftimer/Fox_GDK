@@ -1,4 +1,4 @@
-name: Test Build - no space left on device
+name: Test Build - fix the permission error
 
 on:
   push:
@@ -38,10 +38,6 @@ jobs:
         key: Library-${{ hashFiles('Assets/**', 'Packages/**', 'ProjectSettings/**') }}
         restore-keys: |
           Library-
-    
-    - name: Setup Android SDK
-      if: matrix.targetPlatform == 'Android'
-      uses: android-actions/setup-android@v3
     
     - uses: game-ci/unity-builder@v4
       env:

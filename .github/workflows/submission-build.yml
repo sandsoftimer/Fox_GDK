@@ -1,4 +1,4 @@
-name: Submission Build - no space left on device
+name: Submission Build - fix the permission error
 
 on:
   workflow_dispatch:
@@ -40,10 +40,6 @@ jobs:
         key: Library-${{ hashFiles('Assets/**', 'Packages/**', 'ProjectSettings/**') }}
         restore-keys: |
           Library-
-    
-    - name: Setup Android SDK
-      if: matrix.targetPlatform == 'Android'
-      uses: android-actions/setup-android@v3
     
     - uses: game-ci/unity-builder@v4
       env:
