@@ -72,7 +72,6 @@ jobs:
         targetPlatform:
           - Android
           - WebGL
-          - iOS
     
     steps:
     - uses: actions/checkout@v4
@@ -119,7 +118,6 @@ jobs:
       matrix:
         targetPlatform:
           - Android
-          - iOS
           - WebGL
     
     steps:
