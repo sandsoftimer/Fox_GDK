@@ -36,7 +36,6 @@ public class BuildAutomationSetup : EditorWindow
         string githubFolder = Path.Combine(projectRoot, ".github");
         string workflowsFolder = Path.Combine(githubFolder, "workflows");
 
-        // Create directories if they don't exist
         if (!Directory.Exists(githubFolder))
         {
             Directory.CreateDirectory(githubFolder);
@@ -49,12 +48,9 @@ public class BuildAutomationSetup : EditorWindow
             Debug.Log("Created .github/workflows folder");
         }
 
-        // Always create/overwrite workflow files with current build message
         string testBuildPath = Path.Combine(workflowsFolder, "test-build.yml");
         string submissionBuildPath = Path.Combine(workflowsFolder, "submission-build.yml");
 
-        // Always write files regardless of existence
-        // Always write files regardless of existence
         string testBuildContent = $@"name: Test Build - {buildMessage}
 
 on:
@@ -85,6 +81,10 @@ jobs:
         key: Library-${{{{ hashFiles('Assets/**', 'Packages/**', 'ProjectSettings/**') }}}}
         restore-keys: |
           Library-
+    
+    - name: Setup Android SDK
+      if: matrix.targetPlatform == 'Android'
+      uses: android-actions/setup-android@v3
     
     - uses: game-ci/unity-builder@v4
       env:
@@ -132,6 +132,10 @@ jobs:
         key: Library-${{{{ hashFiles('Assets/**', 'Packages/**', 'ProjectSettings/**') }}}}
         restore-keys: |
           Library-
+    
+    - name: Setup Android SDK
+      if: matrix.targetPlatform == 'Android'
+      uses: android-actions/setup-android@v3
     
     - uses: game-ci/unity-builder@v4
       env:
