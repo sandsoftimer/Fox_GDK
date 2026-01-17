@@ -1,4 +1,4 @@
-name: Submission Build - Android SDK/NDK support added....
+name: Submission Build - platform-specific build
 
 on:
   workflow_dispatch:

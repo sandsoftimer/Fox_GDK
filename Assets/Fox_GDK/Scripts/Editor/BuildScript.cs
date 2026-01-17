@@ -9,17 +9,21 @@ namespace UnityBuilderAction
     {
         public static void Build()
         {
+            BuildTarget buildTarget = EditorUserBuildSettings.activeBuildTarget;
+            
             string[] scenes = EditorBuildSettings.scenes.Length > 0
                 ? GetEnabledScenes()
                 : new string[] { "Assets/Scenes/SampleScene.unity" };
 
-            string buildPath = Path.Combine("build", EditorUserBuildSettings.activeBuildTarget.ToString());
+            string buildPath = GetBuildPath(buildTarget);
+            
+            Directory.CreateDirectory(Path.GetDirectoryName(buildPath));
 
             BuildPlayerOptions buildPlayerOptions = new BuildPlayerOptions
             {
                 scenes = scenes,
                 locationPathName = buildPath,
-                target = EditorUserBuildSettings.activeBuildTarget,
+                target = buildTarget,
                 options = BuildOptions.None
             };
 
@@ -31,8 +35,23 @@ namespace UnityBuilderAction
             }
             else
             {
-                Debug.LogError("Build failed");
+                Debug.LogError("Build failed: " + report.summary.result);
                 EditorApplication.Exit(1);
+            }
+        }
+        
+        private static string GetBuildPath(BuildTarget target)
+        {
+            string basePath = Path.Combine("build", target.ToString());
+            
+            switch (target)
+            {
+                case BuildTarget.WebGL:
+                    return basePath;
+                case BuildTarget.Android:
+                    return Path.Combine(basePath, "game.apk");
+                default:
+                    return basePath;
             }
         }
 
