@@ -1,4 +1,4 @@
-name: Submission Build - Bundle Id Added...
+name: Submission Build - Build completed successfully
 
 on:
   workflow_dispatch:

@@ -1,4 +1,4 @@
-name: Test Build - Bundle Id Added...
+name: Test Build - Build completed successfully
 
 on:
   push:
