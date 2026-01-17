@@ -1,4 +1,4 @@
-name: Test Build - fix the permission error
+name: Test Build - Removed the problematic packages
 
 on:
   push:

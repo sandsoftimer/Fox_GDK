@@ -1,4 +1,4 @@
-name: Submission Build - fix the permission error
+name: Submission Build - Removed the problematic packages
 
 on:
   workflow_dispatch:
