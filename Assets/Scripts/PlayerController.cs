@@ -43,7 +43,6 @@ public class PlayerController : BaseGameBehaviour
             gameManager.GameOver(true);
         }
 #endif
-
     }
 
     #endregion ALL UNITY FUNCTIONS

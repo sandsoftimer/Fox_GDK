@@ -27,7 +27,7 @@ namespace Com.FunFox.Utility
         float tap_n_hold_threshold_time = ConstantManager.TAP_N_HOLD_THRESHOLD;
 
         Vector3 startMousePosition, lastMousePosition;
-        KV_TappingType inputType = KV_TappingType.NONE;
+        Fox_TappingType inputType = Fox_TappingType.NONE;
 
         public bool inputTestingModeOn;
         bool dragging = false;
@@ -51,7 +51,7 @@ namespace Com.FunFox.Utility
                 tapStartedTime = Time.time;
                 startMousePosition = Input.mousePosition;
                 lastMousePosition = Input.mousePosition;
-                inputType = KV_TappingType.TAP_START;
+                inputType = Fox_TappingType.TAP_START;
                 foxManager.ProcessTapping(inputType, Camera.main.ScreenToWorldPoint(Input.mousePosition));
             }
             else if (Input.GetMouseButton(0))
@@ -63,18 +63,18 @@ namespace Com.FunFox.Utility
                 }
                 else if ((Time.time - tapStartedTime) >= tap_n_hold_threshold_time)
                 {
-                    inputType = KV_TappingType.TAP_N_HOLD;
+                    inputType = Fox_TappingType.TAP_N_HOLD;
                     foxManager.ProcessTapping(inputType, Camera.main.ScreenToWorldPoint(Input.mousePosition));
                 }
             }
             else if (Input.GetMouseButtonUp(0))
             {
-                inputType = KV_TappingType.TAP_END;
+                inputType = Fox_TappingType.TAP_END;
                 foxManager.ProcessTapping(inputType, Camera.main.ScreenToWorldPoint(Input.mousePosition));
 
                 if (!dragging && (Time.time - tapStartedTime) <= ConstantManager.SINGLE_TAP_TIME_THRESHOLD && (Input.mousePosition - startMousePosition).magnitude < ConstantManager.DRAGGING_DISTANCE_THRESHOLD)
                 {
-                    inputType = KV_TappingType.SINGLE_TAP;
+                    inputType = Fox_TappingType.SINGLE_TAP;
                     foxManager.ProcessTapping(inputType, Camera.main.ScreenToWorldPoint(Input.mousePosition));
                 }
                 dragging = false;
@@ -87,16 +87,16 @@ namespace Com.FunFox.Utility
                     if (Mathf.Abs(dX) > Mathf.Abs(dY))
                     {
                         if (dX > 0)
-                            foxManager.ProcessSwipping(KV_SwippingType.SWIPE_RIGHT);
+                            foxManager.ProcessSwipping(Fox_SwippingType.SWIPE_RIGHT);
                         else
-                            foxManager.ProcessSwipping(KV_SwippingType.SWIPE_LEFT);
+                            foxManager.ProcessSwipping(Fox_SwippingType.SWIPE_LEFT);
                     }
                     else
                     {
                         if (dY > 0)
-                            foxManager.ProcessSwipping(KV_SwippingType.SWIPE_UP);
+                            foxManager.ProcessSwipping(Fox_SwippingType.SWIPE_UP);
                         else
-                            foxManager.ProcessSwipping(KV_SwippingType.SWIPE_DOWN);
+                            foxManager.ProcessSwipping(Fox_SwippingType.SWIPE_DOWN);
                     }
                 }
             }

@@ -10,11 +10,14 @@ public class FeaturesController : BaseGameBehaviour
 
     [Space]
     public GameObject featureUnlockView;
+    public Fox_Canvas_Animator viewAnim;
     public RectTransform holder;
     public TMP_Text featureName;
     public TMP_Text featureDescription;
     public Image featureIcon;
 
+    FeatureData foundFeature = null;
+    Action showGameoverView = null;
     int unlockLevelNumber;
 
     #region ALL UNITY FUNCTIONS
@@ -24,11 +27,12 @@ public class FeaturesController : BaseGameBehaviour
     {
         base.Awake();
 
-        featureUnlockView.SetActive(false);
-        featureUnlockView.GetComponent<Button>().onClick.AddListener(OnCancel);
+        //featureUnlockView.SetActive(false);
+        featureUnlockView.GetComponent<Button>().onClick.AddListener(OnDone);
 
         gameManager.featuresController = this;
         Set_Unlock_Info();
+        foundFeature = Is_Any_Feature_To_Unlock();
     }
 
     // Start is called before the first frame update
@@ -36,20 +40,6 @@ public class FeaturesController : BaseGameBehaviour
     {
         base.Start();
 
-        FeatureData foundFeature = null;
-        for (int i = 0; i < newFeaturesData.Count; i++)
-        {
-            if ((gameplayData.currentLevelNumber + 1) == newFeaturesData[i].unlockLevelNumber)
-            {
-                foundFeature = newFeaturesData[i];
-                break;
-            }
-        }
-
-        if (foundFeature != null)
-        {
-            Initialize_Feature(foundFeature);
-        }
     }
 
     void Update()
@@ -86,6 +76,30 @@ public class FeaturesController : BaseGameBehaviour
     //=================================
     #region ALL SELF DECLARE FUNCTIONS
 
+    public bool Any_Feature_Unlocked(Action action)
+    {
+        if (foundFeature != null)
+        {
+            showGameoverView = action;
+            Initialize_Feature(foundFeature);
+        }
+
+        return foundFeature != null;
+    }
+
+    public FeatureData Is_Any_Feature_To_Unlock()
+    {
+        for (int i = 0; i < newFeaturesData.Count; i++)
+        {
+            if (gameplayData.currentLevelNumber + 1 == newFeaturesData[i].unlockLevelNumber)
+            {
+                foundFeature = newFeaturesData[i];
+                break;
+            }
+        }
+        return foundFeature;
+    }
+
     public void Initialize_Feature(FeatureData featureData)
     {
         //if (PlayerPrefsX.GetBool(featureData.featureName))
@@ -100,12 +114,14 @@ public class FeaturesController : BaseGameBehaviour
         featureIcon.sprite = featureData.featureIcon;
         holder.anchoredPosition = featureData.panelPosition;
         featureUnlockView.SetActive(true);
+        viewAnim.Set_Visual(true);
     }
 
-    void OnCancel()
+    void OnDone()
     {
-        featureUnlockView.SetActive(false);
-        //gameManager.ChangeGameState(GameState.GAME_PLAY_UNPAUSED);
+        viewAnim.Set_Visual(false);
+        //featureUnlockView.SetActive(false);
+        showGameoverView?.Invoke();
     }
 
     private void Set_Unlock_Info()
@@ -114,20 +130,26 @@ public class FeaturesController : BaseGameBehaviour
         {
             switch (newFeaturesData[i].type)
             {
-                case FeatureType.SQURE_HOLE:
-                    newFeaturesData[i].unlockLevelNumber = gameManager.constantManager.SQURE_HOLES_TUTORIAL_LEVEL;
+                case FeatureType.ICE_BOOSTER:
+                    newFeaturesData[i].unlockLevelNumber = gameManager.constantManager.ICE_BOOSTER_UNLOCK;
                     break;
-                case FeatureType.HIDDEN_BLOCK:
-                    newFeaturesData[i].unlockLevelNumber = gameManager.constantManager.HIDDEN_BLOCK_TUTORIAL_LEVEL;
+                case FeatureType.UZI_GUN:
+                    newFeaturesData[i].unlockLevelNumber = gameManager.constantManager.UZI_GUN_UNLOCK;
                     break;
-                case FeatureType.FROZEN_SPAWNER:
-                    newFeaturesData[i].unlockLevelNumber = gameManager.constantManager.FROZEN_TUTORIAL_LEVEL;
+                case FeatureType.TROOPS_LEVEL_3:
+                    newFeaturesData[i].unlockLevelNumber = gameManager.constantManager.TROOPS_LEVEL_3_UNLOCK;
                     break;
-                case FeatureType.TRIANGLE_HOLE:
-                    newFeaturesData[i].unlockLevelNumber = gameManager.constantManager.TRIANGLE_HOLES_TUTORIAL_LEVEL;
+                case FeatureType.SNAIL_BOOSTER:
+                    newFeaturesData[i].unlockLevelNumber = gameManager.constantManager.SNAIL_BOOSTER_UNLOCK;
                     break;
-                case FeatureType.CONNECTED_HOLES:
-                    newFeaturesData[i].unlockLevelNumber = gameManager.constantManager.CONNECTED_HOLES_TUTORIAL_LEVEL;
+                case FeatureType.MACHINE_GUN_UPDATE:
+                    newFeaturesData[i].unlockLevelNumber = gameManager.constantManager.MACHINE_GUN_UPDATE_UNLOCK;
+                    break;
+                case FeatureType.TROOPS_LEVEL_4:
+                    newFeaturesData[i].unlockLevelNumber = gameManager.constantManager.TROOPS_LEVEL_4_UNLOCK;
+                    break;
+                case FeatureType.EXPLOSION_BOOSTER:
+                    newFeaturesData[i].unlockLevelNumber = gameManager.constantManager.EXPLOSION_BOOSTER_UNLOCK;
                     break;
             }
         }
@@ -150,10 +172,11 @@ public class FeatureData
 
 public enum FeatureType
 {
-    SQURE_HOLE,
-    HIDDEN_BLOCK,
-    FROZEN_SPAWNER,
-    TRIANGLE_HOLE,
-    CONNECTED_HOLES,
-    MULTISTORED,
+    ICE_BOOSTER,
+    UZI_GUN,
+    TROOPS_LEVEL_3,
+    SNAIL_BOOSTER,
+    MACHINE_GUN_UPDATE,
+    TROOPS_LEVEL_4,
+    EXPLOSION_BOOSTER
 }

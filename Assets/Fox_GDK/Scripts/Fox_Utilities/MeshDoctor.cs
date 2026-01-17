@@ -12,7 +12,7 @@ namespace Com.FunFox.Utility
         public int planeXSize, planeZSize;
         public float planeGap = 1;
         public Material planeMaterial;
-        public Pivot pivot;
+        public Fox_Pivot pivot;
 
         MeshRenderer meshRenderer;
         MeshFilter meshFilter;
@@ -189,47 +189,47 @@ namespace Com.FunFox.Utility
             Vector3 offset = Vector3.zero;
             switch (pivot)
             {
-                case Pivot.TOP_LEFT:
+                case Fox_Pivot.TOP_LEFT:
                     offset.x = 0;
                     offset.y = 0;
                     offset.z = -planeZSize;
                     break;
-                case Pivot.TOP_CENTER:
+                case Fox_Pivot.TOP_CENTER:
                     offset.x = -planeXSize / 2f;
                     offset.y = 0;
                     offset.z = -planeZSize;
                     break;
-                case Pivot.TOP_RIGHT:
+                case Fox_Pivot.TOP_RIGHT:
                     offset.x = -planeXSize;
                     offset.y = 0;
                     offset.z = -planeZSize;
                     break;
-                case Pivot.MIDDLE_LEFT:
+                case Fox_Pivot.MIDDLE_LEFT:
                     offset.x = 0;
                     offset.y = 0;
                     offset.z = -planeZSize / 2f;
                     break;
-                case Pivot.MIDDLE_CENTER:
+                case Fox_Pivot.MIDDLE_CENTER:
                     offset.x = -planeXSize / 2f;
                     offset.y = 0;
                     offset.z = -planeZSize / 2f;
                     break;
-                case Pivot.MIDDLE_RIGHT:
+                case Fox_Pivot.MIDDLE_RIGHT:
                     offset.x = -planeXSize;
                     offset.y = 0;
                     offset.z = -planeZSize / 2f;
                     break;
-                case Pivot.BOTTOM_LEFT:
+                case Fox_Pivot.BOTTOM_LEFT:
                     offset.x = 0;
                     offset.y = 0;
                     offset.z = 0;
                     break;
-                case Pivot.BOTTOM_CENTER:
+                case Fox_Pivot.BOTTOM_CENTER:
                     offset.x = -planeXSize / 2f;
                     offset.y = 0;
                     offset.z = 0;
                     break;
-                case Pivot.BOTTOM_RIGHT:
+                case Fox_Pivot.BOTTOM_RIGHT:
                     offset.x = -planeXSize;
                     offset.y = 0;
                     offset.z = 0;

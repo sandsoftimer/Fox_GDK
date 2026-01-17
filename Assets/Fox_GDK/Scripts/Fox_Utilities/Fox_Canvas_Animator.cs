@@ -11,11 +11,11 @@ public class Fox_Canvas_Animator : MonoBehaviour
 
     [Space]
     public Image centerBG;
+    public Color centerBGColor = new Color32(0x35, 0x11, 0x11, 0xFA);
     public float transitionSpeed = ConstantManager.ONE_FORTH_TIME;
     public bool show = false;
 
     RectTransform canvas;
-    Color visualColor;
     Color hideColor;
 
     private void Awake()
@@ -24,12 +24,11 @@ public class Fox_Canvas_Animator : MonoBehaviour
 
         if (centerBG)
         {
-            visualColor = centerBG.color;
-            hideColor = visualColor;
+            hideColor = centerBGColor;
             hideColor.a = 0;
         }
 
-        //StartCoroutine(Initilaize());
+        //StartCoroutine(Initialize());
     }
 
     void Start()
@@ -54,7 +53,7 @@ public class Fox_Canvas_Animator : MonoBehaviour
             if (centerBG)
             {
                 centerBG.enabled = true;
-                centerBG.DOColor(visualColor, animationSpeed);
+                centerBG.DOColor(centerBGColor, animationSpeed);
             }
         }
         else

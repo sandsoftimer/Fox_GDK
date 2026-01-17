@@ -11,31 +11,37 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1707ca83307a1b04cbd2fca9819ded3d, type: 3}
   m_Name: Constant Manager
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier: Assembly-CSharp::ConstantManager
   SCENE_LOOPING_TYPE: 0
-  TOTAL_GAME_LEVELS: 1
-  SCENE_LOOPING_STARTING_INDEX: 1
-  BASIC_TUTORIAL_LEVEL: -1
+  TOTAL_GAME_LEVELS: 10
+  SCENE_LOOPING_STARTING_INDEX: 8
+  BASIC_TUTORIAL_LEVEL: 1
   MARGE_TUTORIAL_LEVEL: -1
-  HIDDEN_HOLES_TUTORIAL_LEVEL: -1
-  HIDDEN_BLOCK_TUTORIAL_LEVEL: -1
-  SQURE_HOLES_TUTORIAL_LEVEL: -1
-  MULTISTORIED_TUTORIAL_LEVEL: -1
-  FROZEN_TUTORIAL_LEVEL: -1
-  TRIANGLE_HOLES_TUTORIAL_LEVEL: -1
-  CONNECTED_HOLES_TUTORIAL_LEVEL: -1
+  ICE_BOOSTER_UNLOCK: 1
+  UZI_GUN_UNLOCK: 2
+  TROOPS_LEVEL_3_UNLOCK: 3
+  SNAIL_BOOSTER_UNLOCK: 4
+  MACHINE_GUN_UPDATE_UNLOCK: 5
+  TROOPS_LEVEL_4_UNLOCK: 6
+  EXPLOSION_BOOSTER_UNLOCK: 7
   MAGNET_UNLOCK_LEVEL_NUMBER: -1
   DOCK_UNLOCK_LEVEL_NUMBER: -1
   HAMMER_UNLOCK_LEVEL_NUMBER: -1
   GOAL_UNLOCK_LEVEL_NUMBER: -1
-  sceneSupportCount: 1
-  hardEnvironmentData:
-    _name: 
-    arrowMat: {fileID: 0}
-    cubeSpawnerMat: {fileID: 0}
-    holeSpawnerBorderMat: {fileID: 0}
-    holeSpawnerMainMat: {fileID: 0}
-    conveyorBorderMat: {fileID: 0}
-    conveyorMainMat: {fileID: 0}
-    floorMat: {fileID: 0}
-  regularEnvironmentDatas: []
+  PLAY_2X_LEVEL_NUMBER: 10
+  CORE_MULTIPLYER: 5
+  whiteColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  redColor:
+    serializedVersion: 2
+    rgba: 4278190335
+  greenColor:
+    serializedVersion: 2
+    rgba: 4278255360
+  blueColor:
+    serializedVersion: 2
+    rgba: 4294901760
+  noColor:
+    serializedVersion: 2
+    rgba: 16777215

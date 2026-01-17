@@ -19,13 +19,13 @@ public partial class ConstantManager : ScriptableObject
 
     [Space(20)]
     [Header("FEATURE PROPERTIES")]
-    public int HIDDEN_HOLES_TUTORIAL_LEVEL = -1;
-    public int HIDDEN_BLOCK_TUTORIAL_LEVEL = -1;
-    public int SQURE_HOLES_TUTORIAL_LEVEL = -1;
-    public int MULTISTORIED_TUTORIAL_LEVEL = -1;
-    public int FROZEN_TUTORIAL_LEVEL = -1;
-    public int TRIANGLE_HOLES_TUTORIAL_LEVEL = -1;
-    public int CONNECTED_HOLES_TUTORIAL_LEVEL = -1;
+    public int ICE_BOOSTER_UNLOCK = -1;
+    public int UZI_GUN_UNLOCK = -1;
+    public int TROOPS_LEVEL_3_UNLOCK = -1;
+    public int SNAIL_BOOSTER_UNLOCK = -1;
+    public int MACHINE_GUN_UPDATE_UNLOCK = -1;
+    public int TROOPS_LEVEL_4_UNLOCK = -1;
+    public int EXPLOSION_BOOSTER_UNLOCK = -1;
 
     [Space(20)]
     [Header("BOOSTER UNLOCK PROPERTIES")]
@@ -33,28 +33,8 @@ public partial class ConstantManager : ScriptableObject
     public int DOCK_UNLOCK_LEVEL_NUMBER = -1;
     public int HAMMER_UNLOCK_LEVEL_NUMBER = -1;
     public int GOAL_UNLOCK_LEVEL_NUMBER = -1;
-
-    #region Environment System
-    [Space(20)]
-    [Header("Environment Datas")]
-    public int sceneSupportCount = 1;
-    public EnvironmentData hardEnvironmentData;
-    public List<EnvironmentData> regularEnvironmentDatas;
-    public EnvironmentData Get_Environment(int currentLevelNumber, Difficulty_Type difficulty_Type)
-    {
-        EnvironmentData result = new();
-
-        if (difficulty_Type.Equals(Difficulty_Type.HARD))
-            result = hardEnvironmentData;
-        else
-        {
-            int index = currentLevelNumber / sceneSupportCount;
-            index = index % regularEnvironmentDatas.Count;
-            result = regularEnvironmentDatas[index];
-        }
-        return result;
-    }
-    #endregion Environment System
+    public int PLAY_2X_LEVEL_NUMBER = -1;
+    public int CORE_MULTIPLYER = 5;
 
     #endregion Custom attributes of this game
 
@@ -74,6 +54,12 @@ public partial class ConstantManager : ScriptableObject
     public const float DRAGGING_DISTANCE_THRESHOLD = 0.1f;
     public const float TAP_N_HOLD_THRESHOLD = 0.1f;
     public const float SWIPPING_THRESHOLD = 0.5f;
+
+    public Color32 whiteColor = new Color32(255, 255, 255, 255);
+    public Color32 redColor = new Color32(255, 0, 0, 255);
+    public Color32 greenColor = new Color32(0, 255, 0, 255);
+    public Color32 blueColor = new Color32(0, 0, 255, 255);
+    public Color32 noColor = new Color32(255, 255, 255, 0);
 
     /// <summary>
     /// Create an integer variable for script use

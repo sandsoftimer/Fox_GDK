@@ -9,20 +9,21 @@ using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Purchasing;
+using UnityEngine.UI;
 
 [DefaultExecutionOrder(ConstantManager.FoxManagerOrder)]
 public class FoxManager : MonoBehaviour, IHierarchyIcon
 {
-    public static Action<PurchaseEventArgs, Product_ID> OnInAppPurchsedDone;
+    public static Action<PurchaseEventArgs, Product_ID> OnInAppPurchasedDone;
     public static Action<Booster_Item> OnBoosterPurchased;
     public static Action<Booster_Item> OnBoosterCanceled;
-    public static Action<Booster_Item> OnBoosterPreimplemented;
+    public static Action<Booster_Item> OnBoosterReimplemented;
     public static Action<Booster_Item> OnBoosterImplemented;
     public static Action<Booster_Item> OnBoosterClickedWhileBusy;
 
     public static Action OnReviveGame;
 
-    public static Action<FoxObject> OnAddFoxBehaviour;
+    public static Action<FoxObject> OnAddFoxBehavior;
     public static Action<GameState> OnChangeGameState;
     public static Action OnGameInitialize;
     public static Action OnGameStart;
@@ -32,15 +33,16 @@ public class FoxManager : MonoBehaviour, IHierarchyIcon
     public static Action OnPauseGamePlay;
     public static Action OnUnPauseGamePlay;
 
-    public static Action<KV_TappingType, Vector3> OnTap;
+    public static Action<Fox_TappingType, Vector3> OnTap;
     public static Action<Vector3> OnDrag;
-    public static Action<KV_SwippingType> OnSwip;
+    public static Action<Fox_SwippingType> OnSwipe;
     public static Action<float> OnZoom;
 
     public GameplayData gameplayData = new GameplayData();
     public GameState gameState;
     public TextMeshProUGUI levelText;
     public Fox_Canvas_Animator allButtonsUI, gameStartingUI, gamePlayUI, gameSuccessUI, gameFaildUI, gameCustomUI;
+
 
     [Space]
     public float cam_Focus_Distance = 45;
@@ -49,11 +51,8 @@ public class FoxManager : MonoBehaviour, IHierarchyIcon
     public CurrencySystem currencyMainSystem;
     public Popup_Controller retryPopupController;
 
-    [Space]
-    public AudioSource activityTapSound;
-    public AudioSource ButtonTapSound;
-    public AudioSource gameFailSound;
-    public AudioSource gameSuccessSound;
+    public Image screenDamageBorder;
+    Coroutine redAlartRoutine;
 
     [Header("==================")]
     public bool debugModeOn;
@@ -70,6 +69,7 @@ public class FoxManager : MonoBehaviour, IHierarchyIcon
     [ReadOnlyProperty] public Tutorial_View tutorial_View;
     [ReadOnlyProperty] public Mask_Manager maskManager;
     [ReadOnlyProperty] public ConstantManager constantManager;
+    [ReadOnlyProperty] public SaturationManager saturationManager;
     [ReadOnlyProperty] public bool centerInputDetector;
 
     [HideInInspector] public int totalGivenTask = 0, totalCompletedTask = 0, totalIncompleteTask = 0;
@@ -83,12 +83,12 @@ public class FoxManager : MonoBehaviour, IHierarchyIcon
 
     private void OnEnable()
     {
-        OnAddFoxBehaviour += AddFoxBehaviour;
+        OnAddFoxBehavior += AddFoxBehaviour;
     }
 
     private void OnDisable()
     {
-        OnAddFoxBehaviour -= AddFoxBehaviour;
+        OnAddFoxBehavior -= AddFoxBehaviour;
     }
 
     public virtual void Awake()
@@ -103,7 +103,7 @@ public class FoxManager : MonoBehaviour, IHierarchyIcon
         AudioListener.volume = gameplayData.soundEffectOn ? 1 : 0;
 
         if (levelText)
-            levelText.text = "Lvl " + (gameplayData.currentLevelNumber + 1);
+            levelText.text = "Level - " + (gameplayData.currentLevelNumber + 1);
     }
 
     public virtual void Start()
@@ -142,7 +142,7 @@ public class FoxManager : MonoBehaviour, IHierarchyIcon
         foxObject.gameplayData = gameplayData;
     }
 
-    public virtual void ProcessTapping(KV_TappingType tappingType, Vector3 tapOnWorldSpace)
+    public virtual void ProcessTapping(Fox_TappingType tappingType, Vector3 tapOnWorldSpace)
     {
         OnTap?.Invoke(tappingType, tapOnWorldSpace);
     }
@@ -150,9 +150,9 @@ public class FoxManager : MonoBehaviour, IHierarchyIcon
     {
         OnDrag?.Invoke(dragAmount);
     }
-    public virtual void ProcessSwipping(KV_SwippingType swippingType)
+    public virtual void ProcessSwipping(Fox_SwippingType swippingType)
     {
-        OnSwip?.Invoke(swippingType);
+        OnSwipe?.Invoke(swippingType);
     }
     public virtual void ProcessZooming(float zoom)
     {
@@ -277,14 +277,14 @@ public class FoxManager : MonoBehaviour, IHierarchyIcon
             if (gameOver_Confetti != null)
                 gameOver_Confetti.Play_Particle();
 
-            if (gameSuccessSound)
-                gameSuccessSound.Play();
+            if (AudioManager.instance.gameSuccessSound)
+                AudioManager.instance.gameSuccessSound.Play();
 
         }
         else
         {
-            if (gameFailSound)
-                gameFailSound.Play();
+            if (AudioManager.instance.gameFailSound)
+                AudioManager.instance.gameFailSound.Play();
         }
         SaveGame();
 
@@ -293,8 +293,8 @@ public class FoxManager : MonoBehaviour, IHierarchyIcon
 
     public virtual void PlayThisSoundEffect(AudioClip audioClip)
     {
-        if (runtimeAudioSource.clip == null)
-            runtimeAudioSource.clip = audioClip;
+        //if (runtimeAudioSource.clip == null)
+        runtimeAudioSource.clip = audioClip;
 
         runtimeAudioSource.Play();
     }
@@ -323,6 +323,32 @@ public class FoxManager : MonoBehaviour, IHierarchyIcon
     }
 
     #region COMMON_GAME_FUNCTIONALITIES
+
+    public void Start_Red_Alert()
+    {
+        if (redAlartRoutine == null)
+            redAlartRoutine = StartCoroutine(Redline_Enemy_Feedback());
+    }
+
+    public void Stop_Red_Alert()
+    {
+        if (redAlartRoutine != null)
+        {
+            StopCoroutine(redAlartRoutine);
+        }
+        redAlartRoutine = null;
+    }
+
+    IEnumerator Redline_Enemy_Feedback()
+    {
+        screenDamageBorder.color = constantManager.noColor;
+        while (true)
+        {
+            yield return screenDamageBorder.DOColor(constantManager.redColor, ConstantManager.ONE_FORTH_TIME).WaitForCompletion();
+            AudioManager.instance.redAlertSource.Play();
+            yield return screenDamageBorder.DOColor(constantManager.noColor, ConstantManager.ONE_FORTH_TIME).WaitForCompletion();
+        }
+    }
 
     public void Dragging_On()
     {
@@ -370,7 +396,7 @@ public class FoxManager : MonoBehaviour, IHierarchyIcon
     public virtual void BoosterPreImplemented(Booster_Item booster_Item)
     {
         booster_Item.COUNT--;
-        OnBoosterPreimplemented?.Invoke(booster_Item);
+        OnBoosterReimplemented?.Invoke(booster_Item);
     }
 
     public virtual void BoosterImplemented(Booster_Item booster_Data)
@@ -380,7 +406,7 @@ public class FoxManager : MonoBehaviour, IHierarchyIcon
 
     public virtual void IAP_Purchase_Done(PurchaseEventArgs purchaseEventArgs, Product_ID product_ID)
     {
-        OnInAppPurchsedDone?.Invoke(purchaseEventArgs, product_ID);
+        OnInAppPurchasedDone?.Invoke(purchaseEventArgs, product_ID);
     }
 
     public void Send_Custom_Event(string eventName)

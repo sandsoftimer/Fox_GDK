@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
@@ -5,16 +6,23 @@ using UnityEngine.UI;
 
 public class Health : FoxObject
 {
+    public Action OnFinishHealth;
+    public Action<float, Bullet> OnLooseHealth;
+    public Action<float> OnGainHealth;
+
     public Transform visualsHolder;
     public Transform damageTextHolder;
-    public Image healthAcctualBar, decreaseAnimBar;
+    public Image healthAcctualBar;
+    public TMP_Text healthAcctualText;
+    public Image decreaseAnimBar;
     public GameObject damageTextPrefab;
     public float healthMaxValue = 100f;
     public float fillAnimationTime = 1;
-    public bool hideBarOnDie = true;
+    public bool hideBarInitially = false, hideBarOnDie = true;
     public bool showDamageText = false;
 
     public float health = 100f;
+
     IEnumerator fillAnim = null;
 
     public float GET_CURRENT_HEALTH
@@ -28,6 +36,8 @@ public class Health : FoxObject
     {
         base.OnEnable();
 
+        OnGainHealth += Gain;
+        OnLooseHealth += Damage;
     }
 
     // Awake is called before Start
@@ -36,13 +46,13 @@ public class Health : FoxObject
         base.Awake();
 
         fillAnim = Fill_Animation();
+        ResetHealth(healthMaxValue);
     }
 
     // Start is called before the first frame update
     public override void Start()
     {
         base.Start();
-        ResetHealth(healthMaxValue);
     }
 
     void Update()
@@ -79,7 +89,7 @@ public class Health : FoxObject
         healthAcctualBar.gameObject.SetActive(value);
     }
 
-    public float Damage(float value)
+    public void Damage(float value, Bullet bullet)
     {
         health = Mathf.Clamp(health - Mathf.Abs(value), 0, health);
         if (showDamageText)
@@ -89,9 +99,11 @@ public class Health : FoxObject
             damageText.text = $"-{Mathf.Abs(value)}";
             FoxTools.poolManager.Destroy(go, 2);
         }
-
         UpdateVisuals();
-        return health;
+        if (health == 0)
+            OnFinishHealth?.Invoke();
+
+        //return health;
     }
 
     public void Gain(float value)
@@ -102,27 +114,30 @@ public class Health : FoxObject
 
     void UpdateVisuals()
     {
+        if (visualsHolder == null)
+            return;
+
+        //if (hideBarInitially && health == healthMaxValue)
+        //{
+        //    visualsHolder.gameObject.SetActive(false);
+        //    return;
+        //}
+
         if (healthAcctualBar != null)
         {
             healthAcctualBar.fillAmount = Mathf.InverseLerp(0, healthMaxValue, health);
             healthAcctualBar.gameObject.SetActive(health > 0);
             visualsHolder.gameObject.SetActive(visualsHolder != null && !(health == 0 && hideBarOnDie));
         }
+        if (healthAcctualText) healthAcctualText.text = $"{Mathf.Ceil(health)}";
 
-        if(fillAnim != null)
-            StopCoroutine(fillAnim);
-        fillAnim = Fill_Animation();
-        StartCoroutine(fillAnim);
-        //Debug.LogError($"Start {fillAnim == null}");
-    }
-
-    public void ResetHealth(float healthPickValue)
-    {
-        this.healthMaxValue = healthPickValue;
-        health = healthPickValue;
-        healthAcctualBar.fillAmount = Mathf.InverseLerp(0, healthMaxValue, health);
-        decreaseAnimBar.fillAmount = healthAcctualBar.fillAmount;
-        UpdateVisuals();
+        if (decreaseAnimBar)
+        {
+            if (fillAnim != null)
+                StopCoroutine(fillAnim);
+            fillAnim = Fill_Animation();
+            StartCoroutine(fillAnim);
+        }
     }
 
     IEnumerator Fill_Animation()
@@ -139,6 +154,17 @@ public class Health : FoxObject
         }
         decreaseAnimBar.fillAmount = healthAcctualBar.fillAmount;
         //Debug.LogError($"{decreaseAnimBar.fillAmount} == {healthAcctualBar.fillAmount}");
+    }
+
+    public void ResetHealth(float healthPickValue)
+    {
+        this.healthMaxValue = healthPickValue;
+        health = healthPickValue;
+        if (healthAcctualBar)
+            healthAcctualBar.fillAmount = Mathf.InverseLerp(0, healthMaxValue, health);
+        if (decreaseAnimBar)
+            decreaseAnimBar.fillAmount = healthAcctualBar.fillAmount;
+        UpdateVisuals();
     }
 
     #endregion ALL SELF DECLARE FUNCTIONS

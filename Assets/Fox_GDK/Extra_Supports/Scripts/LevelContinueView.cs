@@ -77,7 +77,7 @@ public class LevelContinueView : BaseGameBehaviour
         if (gameplayData.gameoverSuccess)
             return;
 
-        Temp_Solution_For_This_Build_Olny();
+        //Temp_Solution_For_This_Build_Olny();
     }
 
     #endregion ALL OVERRIDING FUNCTIONS
@@ -87,9 +87,9 @@ public class LevelContinueView : BaseGameBehaviour
     public void Temp_Solution_For_This_Build_Olny()
     {
         gameManager.ChangeGameState(GameState.GAME_PLAY_PAUSED);
-        //retryView.SetActive(true);
 
-        Popup_This();
+        retryView.SetActive(true);
+        //Popup_This();
         //OnCloseButtonPress();
     }
 

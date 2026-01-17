@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class GameManager : FoxManager
 {
-
     public override void Awake()
     {
         base.Awake();

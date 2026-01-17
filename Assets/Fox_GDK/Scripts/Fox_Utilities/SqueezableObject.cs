@@ -63,7 +63,7 @@ public class SqueezableObject : FoxObject
                 //_action += () => gameManager.PlayThisSoundEffect(effectSoundClip);
             }
             vfx.localScale = Vector3.zero;
-            vfx.SqueezeEffect(squeezableData, ConstantManager.ONE_HALF_TIME, _action);
+            vfx.FOXE_SqueezeEffect(squeezableData, ConstantManager.ONE_HALF_TIME, _action);
         }
     }
 

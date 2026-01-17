@@ -1,12 +1,11 @@
-using System;
-using System.Collections.Generic;
-using UnityEngine;
+using DG.Tweening;
+using UnityEngine.UI;
 
 public class Mask_Manager : BaseGameBehaviour
 {
-    public Renderer maskRenderer;
+    public Image img;
 
-    public List<Mask_Data> mask_Datas;
+    UI_Hole_Data uI_Hole_Data;
 
     #region ALL UNITY FUNCTIONS
 
@@ -17,7 +16,7 @@ public class Mask_Manager : BaseGameBehaviour
 
         gameManager.maskManager = this;
 
-        maskRenderer.gameObject.SetActive(false);
+        img.gameObject.SetActive(false);
         //gameObject.SetActive(gameplayData.currentLevelNumber == gameManager.constantManager.BASIC_TUTORIAL_LEVEL);
     }
 
@@ -76,31 +75,26 @@ public class Mask_Manager : BaseGameBehaviour
     //=================================
     #region ALL SELF DECLARE FUNCTIONS
 
-    public void Initialize_Next_Masking(int index)
+    public void Initialize_Next_Masking(UI_Hole_Data uI_Hole_Data)
     {
-        gameObject.SetActive(true);
-        maskRenderer.gameObject.SetActive(true);
-        if (index >= mask_Datas.Count)
-        {
-            gameObject.SetActive(false);
-            return;
-        }
+        this.uI_Hole_Data = uI_Hole_Data;
 
-        maskRenderer.material.SetVector("_Mask_Size", mask_Datas[index].sizes);
-        maskRenderer.material.SetVector("_Mask_Position", mask_Datas[index].position);
+        img.DOKill();
+        img.gameObject.SetActive(true);
+        img.color = gameManager.constantManager.noColor;
+        img.DOColor(gameManager.constantManager.whiteColor, ConstantManager.ONE_HALF_TIME);
+
+        img.material.SetVector("_HoleSize", uI_Hole_Data.sizes);
+        img.material.SetVector("_HoleCenter", uI_Hole_Data.position);
     }
 
     public void Set_Off_Mask()
     {
-        maskRenderer.gameObject.SetActive(false);
+        img.DOColor(gameManager.constantManager.noColor, ConstantManager.ONE_FORTH_TIME).OnComplete(() =>
+        {
+            img.gameObject.SetActive(false);
+        });
     }
 
     #endregion ALL SELF DECLARE FUNCTIONS
-}
-
-[Serializable]
-public class Mask_Data
-{
-    public string Identity;
-    public Vector2 position, sizes;
 }

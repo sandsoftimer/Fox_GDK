@@ -1,4 +1,4 @@
-﻿public enum LoadSceneType
+﻿public enum Fox_LoadSceneType
 {
     LOAD_BY_NAME,
     LOAD_BY_INDEX
@@ -28,7 +28,7 @@ public enum AcceptedValueType
     NONE
 }
 
-public enum KV_TappingType
+public enum Fox_TappingType
 {
     NONE,
     TAP_START,
@@ -37,7 +37,7 @@ public enum KV_TappingType
     TAP_N_HOLD
 }
 
-public enum KV_SwippingType
+public enum Fox_SwippingType
 {
     SWIPE_UP,
     SWIPE_DOWN,
@@ -45,20 +45,20 @@ public enum KV_SwippingType
     SWIPE_RIGHT
 }
 
-public enum WeaponType
+public enum Fox_WeaponType
 {
     MELEE,
     GUN
 }
 
-public enum UpdateMethod
+public enum Fox_UpdateMethod
 {
     UPDATE,
     FIXED_UPDATE,
     LATE_UPDATE
 }
 
-public enum KV_Axis
+public enum Fox_Axis
 {
     ALL,
     X,
@@ -73,7 +73,7 @@ public enum MeshUsingType
     DEFORMING
 }
 
-public enum Pivot
+public enum Fox_Pivot
 {
     TOP_LEFT,
     TOP_CENTER,
@@ -86,14 +86,14 @@ public enum Pivot
     BOTTOM_RIGHT
 }
 
-public enum MovingMethod
+public enum Fox_MovingMethod
 {
     TRANSFORM_POSITION,
     RIGIDBODY,
     TRAVEL_PATH
 }
 
-public enum KV_Scene_Transition_Type
+public enum Fox_Scene_Transition_Type
 {
     FADE,
     TEXTURE_ANIMATION,

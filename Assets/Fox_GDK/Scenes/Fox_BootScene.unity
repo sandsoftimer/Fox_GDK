@@ -633,6 +633,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01614664b831546d2ae94a42149d80ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_SendPointerHoverToParent: 1
+  m_MoveRepeatDelay: 0.5
+  m_MoveRepeatRate: 0.1
+  m_XRTrackingOrigin: {fileID: 0}
+  m_ActionsAsset: {fileID: 0}
+  m_PointAction: {fileID: 0}
+  m_MoveAction: {fileID: 0}
+  m_SubmitAction: {fileID: 0}
+  m_CancelAction: {fileID: 0}
+  m_LeftClickAction: {fileID: 0}
+  m_MiddleClickAction: {fileID: 0}
+  m_RightClickAction: {fileID: 0}
+  m_ScrollWheelAction: {fileID: 0}
+  m_TrackedDevicePositionAction: {fileID: 0}
+  m_TrackedDeviceOrientationAction: {fileID: 0}
+  m_DeselectOnBackgroundClick: 1
+  m_PointerBehavior: 0
+  m_CursorLockBehavior: 0
+  m_ScrollDeltaPerTick: 6
 --- !u!1 &1801591786
 GameObject:
   m_ObjectHideFlags: 0
@@ -667,7 +686,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 206}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 512, y: 512}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1801591788
@@ -690,7 +709,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 62a464302a2f44e96826cc294d635821, type: 3}
+  m_Sprite: {fileID: 21300000, guid: fe9c19c5496490d40959f0f3f87ba236, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -881,6 +900,9 @@ MonoBehaviour:
     reviveAttemptNumber: 1
     softFailAttemptNumber: 1
     commonAttempt: 1
+    remainningIces: 0
+    remainningSnails: 0
+    remainningExplosion: 0
     gameStartTime: 0
     gameEndTime: 0
     totalLevelCompletedTime: 0
@@ -899,6 +921,7 @@ MonoBehaviour:
     current_Level_Data: {fileID: 0}
   gameState: 0
   levelText: {fileID: 0}
+  allButtonsUI: {fileID: 0}
   gameStartingUI: {fileID: 0}
   gamePlayUI: {fileID: 0}
   gameSuccessUI: {fileID: 0}
@@ -907,10 +930,6 @@ MonoBehaviour:
   cam_Focus_Distance: 45
   currencyMainSystem: {fileID: 0}
   retryPopupController: {fileID: 0}
-  activityTapSound: {fileID: 0}
-  ButtonTapSound: {fileID: 0}
-  gameFailSound: {fileID: 0}
-  gameSuccessSound: {fileID: 0}
   debugModeOn: 0
   eventSystem: {fileID: 0}
   booster_Panel_Controller: {fileID: 0}
@@ -924,6 +943,7 @@ MonoBehaviour:
   tutorial_View: {fileID: 0}
   maskManager: {fileID: 0}
   constantManager: {fileID: 0}
+  centerInputDetector: 0
   totalGivenTask: 0
   totalCompletedTask: 0
   totalIncompleteTask: 0

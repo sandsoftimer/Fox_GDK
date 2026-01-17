@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class Weapon : FoxObject
 {
-    public WeaponType weaponType;
+    public Fox_WeaponType weaponType;
     public GameObject vfx;
     public WeaponData weaponData;
     public BulletData bulletData;
@@ -17,6 +14,7 @@ public class Weapon : FoxObject
     float fireCoolDown;
     Transform directionPoint;
     public LayerMask layerMask;
+    public LayerMask bulletCollisionLayer;
 
     Animator anim;
     [HideInInspector]
@@ -64,18 +62,18 @@ public class Weapon : FoxObject
             return;
 
         fireCoolDown -= Time.deltaTime;
-        if(fireCoolDown <= 0 && fireIsOn)
+        if (fireCoolDown <= 0 && fireIsOn)
         {
             fireCoolDown = 1f / (weaponData.fireRate * weaponData.fireRateMinimizer);
 
-            if (weaponType.Equals(WeaponType.GUN))
+            if (weaponType.Equals(Fox_WeaponType.GUN))
             {
                 Fire();
             }
             else
                 MeleeAttack();
         }
-        else if(!fireIsOn)
+        else if (!fireIsOn)
         {
             fireCoolDown = 0;
         }
@@ -140,15 +138,16 @@ public class Weapon : FoxObject
             bulletObj = FoxTools.poolManager.Instantiate(
                 weaponData.bulletPrefab,
                 bulletSpawnPoints[i].position,
-                directionPoint == null? bulletSpawnPoints[i].rotation :
+                directionPoint == null ? bulletSpawnPoints[i].rotation :
                                         Quaternion.LookRotation(directionPoint.position - bulletSpawnPoints[i].position, Vector3.up)
                 );
             bulletObj.layer = layerMask;
-            bulletObj.GetComponent<Bullet>().Initialize(bulletData, weaponType, OnBulletHitAction);
+            bulletObj.GetComponent<Bullet>().Initialize(bulletData, weaponType, bulletCollisionLayer, OnBulletHitAction);
         }
     }
 
-    void MeleeAttack() {
+    void MeleeAttack()
+    {
 
         if (anim != null)
         {

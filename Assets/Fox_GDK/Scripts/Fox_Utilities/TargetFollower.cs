@@ -6,7 +6,7 @@ public class TargetFollower : FoxObject
 {
     public Transform followTarget, lookTarget;
 
-    public UpdateMethod updateMethod;
+    public Fox_UpdateMethod updateMethod;
     [Header("Follow Properties")]
     public bool followEnable;
     [Range(0f, 1f)]
@@ -39,7 +39,7 @@ public class TargetFollower : FoxObject
 
     public virtual void Update()
     {
-        if (!updateMethod.Equals(UpdateMethod.UPDATE))
+        if (!updateMethod.Equals(Fox_UpdateMethod.UPDATE))
             return;
 
         UpdateTransform();
@@ -47,7 +47,7 @@ public class TargetFollower : FoxObject
 
     public virtual void FixedUpdate()
     {
-        if (!updateMethod.Equals(UpdateMethod.FIXED_UPDATE))
+        if (!updateMethod.Equals(Fox_UpdateMethod.FIXED_UPDATE))
             return;
 
         UpdateTransform();
@@ -55,7 +55,7 @@ public class TargetFollower : FoxObject
 
     private void LateUpdate()
     {
-        if (!updateMethod.Equals(UpdateMethod.LATE_UPDATE))
+        if (!updateMethod.Equals(Fox_UpdateMethod.LATE_UPDATE))
             return;
 
         UpdateTransform();

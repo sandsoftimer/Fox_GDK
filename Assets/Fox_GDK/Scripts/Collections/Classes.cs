@@ -12,6 +12,10 @@ public partial class GameplayData
     public int softFailAttemptNumber = 1;
     public int commonAttempt = 1;
 
+    public int remainningIces = 0;
+    public int remainningSnails = 0;
+    public int remainningExplosion = 0;
+
     public float gameStartTime, gameEndTime;
     public float totalLevelCompletedTime;
 

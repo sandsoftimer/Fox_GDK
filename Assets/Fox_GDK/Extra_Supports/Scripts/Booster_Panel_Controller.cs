@@ -186,7 +186,7 @@ public class Booster_Panel_Controller : BaseGameBehaviour
 
     public void OnPurchaseButtonPress(Action<bool> onConfirmPurchase)
     {
-        gameManager.ButtonTapSound.Play();
+        AudioManager.instance.ButtonTapSound.Play();
         ulong purchasePrice = Get_Price();
         if (gameManager.currencyMainSystem.REMAINING_CURRENCY >= purchasePrice)
         {
@@ -210,7 +210,7 @@ public class Booster_Panel_Controller : BaseGameBehaviour
             if (success)
             {
                 onConfirmPurchase?.Invoke(true);
-                gameManager.ButtonTapSound.Play();
+                AudioManager.instance.ButtonTapSound.Play();
 
                 switch (currentActiveBooster.type)
                 {
@@ -275,7 +275,7 @@ public class Booster_Panel_Controller : BaseGameBehaviour
                 onBoosterPurchaseAttemptResultConfirmed = null;
             });
         }
-        gameManager.ButtonTapSound.Play();
+        AudioManager.instance.ButtonTapSound.Play();
     }
 
     private bool Is_Booster_Available(Booster_Item booster_Data)

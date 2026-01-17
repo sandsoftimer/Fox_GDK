@@ -387,6 +387,9 @@ MonoBehaviour:
     reviveAttemptNumber: 1
     softFailAttemptNumber: 1
     commonAttempt: 1
+    remainningIces: 0
+    remainningSnails: 0
+    remainningExplosion: 0
     gameStartTime: 0
     gameEndTime: 0
     totalLevelCompletedTime: 0
@@ -403,6 +406,7 @@ MonoBehaviour:
     vibrationEffectOn: 1
     tutorial_Tap_Blocker: 0
     current_Level_Data: {fileID: 0}
+  mainCamera: {fileID: 0}
   gameState: 0
 --- !u!1 &3648474694709059724
 GameObject:
@@ -547,7 +551,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3104023570512084863}
   - component: {fileID: 676201858555127022}
-  - component: {fileID: 3639245448760310447}
+  - component: {fileID: 1538983939526388768}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -585,7 +589,7 @@ MonoBehaviour:
   m_FirstSelected: {fileID: 0}
   m_sendNavigationEvents: 1
   m_DragThreshold: 10
---- !u!114 &3639245448760310447
+--- !u!114 &1538983939526388768
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -594,28 +598,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 3971363339501520915}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01614664b831546d2ae94a42149d80ac, type: 3}
+  m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Unity.InputSystem::UnityEngine.InputSystem.UI.InputSystemUIInputModule
+  m_EditorClassIdentifier: 
   m_SendPointerHoverToParent: 1
-  m_MoveRepeatDelay: 0.5
-  m_MoveRepeatRate: 0.1
-  m_XRTrackingOrigin: {fileID: 0}
-  m_ActionsAsset: {fileID: -944628639613478452, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
-  m_PointAction: {fileID: -1654692200621890270, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
-  m_MoveAction: {fileID: -8784545083839296357, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
-  m_SubmitAction: {fileID: 392368643174621059, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
-  m_CancelAction: {fileID: 7727032971491509709, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
-  m_LeftClickAction: {fileID: 3001919216989983466, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
-  m_MiddleClickAction: {fileID: -2185481485913320682, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
-  m_RightClickAction: {fileID: -4090225696740746782, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
-  m_ScrollWheelAction: {fileID: 6240969308177333660, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
-  m_TrackedDevicePositionAction: {fileID: 6564999863303420839, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
-  m_TrackedDeviceOrientationAction: {fileID: 7970375526676320489, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
-  m_DeselectOnBackgroundClick: 1
-  m_PointerBehavior: 0
-  m_CursorLockBehavior: 0
-  m_ScrollDeltaPerTick: 6
+  m_HorizontalAxis: Horizontal
+  m_VerticalAxis: Vertical
+  m_SubmitButton: Submit
+  m_CancelButton: Cancel
+  m_InputActionsPerSecond: 10
+  m_RepeatDelay: 0.5
+  m_ForceModuleActive: 0
 --- !u!1 &6084915417893337995
 GameObject:
   m_ObjectHideFlags: 0
@@ -781,6 +774,7 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 935015410380411100}
   - {fileID: 4272221324464536062}
   - {fileID: 292957865927721840}
   - {fileID: 6205423038590601286}
@@ -898,6 +892,9 @@ MonoBehaviour:
     reviveAttemptNumber: 1
     softFailAttemptNumber: 1
     commonAttempt: 1
+    remainningIces: 0
+    remainningSnails: 0
+    remainningExplosion: 0
     gameStartTime: 0
     gameEndTime: 0
     totalLevelCompletedTime: 0
@@ -925,10 +922,7 @@ MonoBehaviour:
   cam_Focus_Distance: 45
   currencyMainSystem: {fileID: 6469431648970295950}
   retryPopupController: {fileID: 2525613814403138135}
-  activityTapSound: {fileID: 5229800068231990543}
-  ButtonTapSound: {fileID: 1202106720741227995}
-  gameFailSound: {fileID: 3792486675764589493}
-  gameSuccessSound: {fileID: 1631602525376488206}
+  screenDamageBorder: {fileID: 5549108129289381501}
   debugModeOn: 1
   eventSystem: {fileID: 0}
   booster_Panel_Controller: {fileID: 0}
@@ -942,6 +936,7 @@ MonoBehaviour:
   tutorial_View: {fileID: 1840504248356635835}
   maskManager: {fileID: 0}
   constantManager: {fileID: 0}
+  saturationManager: {fileID: 0}
   centerInputDetector: 0
   totalGivenTask: 0
   totalCompletedTask: 0
@@ -1247,6 +1242,81 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!1 &7353492960064067951
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 935015410380411100}
+  - component: {fileID: 6045690607861866401}
+  - component: {fileID: 5549108129289381501}
+  m_Layer: 5
+  m_Name: Screen Danage Border
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &935015410380411100
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7353492960064067951}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6135751670003352373}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &6045690607861866401
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7353492960064067951}
+  m_CullTransparentMesh: 1
+--- !u!114 &5549108129289381501
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7353492960064067951}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 0
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 8304768006fec594fa5507d4c28437c4, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &7871971346965237251
 GameObject:
   m_ObjectHideFlags: 0
@@ -1319,6 +1389,9 @@ MonoBehaviour:
     reviveAttemptNumber: 1
     softFailAttemptNumber: 1
     commonAttempt: 1
+    remainningIces: 0
+    remainningSnails: 0
+    remainningExplosion: 0
     gameStartTime: 0
     gameEndTime: 0
     totalLevelCompletedTime: 0
@@ -1335,6 +1408,7 @@ MonoBehaviour:
     vibrationEffectOn: 1
     tutorial_Tap_Blocker: 0
     current_Level_Data: {fileID: 0}
+  mainCamera: {fileID: 0}
   gameState: 0
 --- !u!1001 &84814865903335895
 PrefabInstance:

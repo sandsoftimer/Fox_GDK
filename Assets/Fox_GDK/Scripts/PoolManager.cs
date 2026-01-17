@@ -21,7 +21,7 @@ namespace Com.FunFox.Utility
     {
         Dictionary<string, Queue<GameObject>> poolDictionary = new Dictionary<string, Queue<GameObject>>();
 
-        public GameObject Instantiate(GameObject prefabObj, Vector3 position, Quaternion rotation, Transform parent = null)
+        public GameObject Instantiate(GameObject prefabObj, Vector3 position, Quaternion rotation, Transform parent = null, float autoDestroyTime = -1f)
         {
             // Finally this object will be return
             GameObject obj;
@@ -44,6 +44,9 @@ namespace Com.FunFox.Utility
             obj.transform.localPosition = position;
             obj.transform.localRotation = rotation;
             obj.SetActive(true);
+
+            if (autoDestroyTime > 0) Destroy(obj, autoDestroyTime);
+
             return obj;
         }
 

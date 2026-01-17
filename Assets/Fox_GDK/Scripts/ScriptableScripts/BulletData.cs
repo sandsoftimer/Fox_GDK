@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "BulletData", menuName = "FoxTools/Inventory/BulletData")]
@@ -10,6 +8,7 @@ public class BulletData : ScriptableObject
     public float bulletDefaultDamage;
     public float bulletAdditionalDamage;
     public ParticleSystem onHitParticle;
+    public AudioClip onHitSoundClip;
 
     public float BULLET_CURRENT_DAMAGE
     {
@@ -24,6 +23,7 @@ public class BulletData : ScriptableObject
         bulletData.bulletDefaultDamage = this.bulletDefaultDamage;
         bulletData.bulletAdditionalDamage = this.bulletAdditionalDamage;
         bulletData.onHitParticle = this.onHitParticle;
+        bulletData.onHitSoundClip = this.onHitSoundClip;
         return bulletData;
     }
 }

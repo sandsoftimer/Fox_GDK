@@ -86,7 +86,7 @@ public class GameOverReward : BaseGameBehaviour
         normalButton.gameObject.SetActive(false);
         claim2XButton.gameObject.SetActive(false);
         //gameplayData.previousLevelEaring = (int)regularReward;
-        gameManager.currencyMainSystem.AddCurrency(regularReward, Vector3.zero, gameManager.gameCustomUI.transform, 5, 0.75f,
+        gameManager.currencyMainSystem.AddCurrency(regularReward, Vector3.zero, false, gameManager.gameCustomUI.transform, 5, 0.75f,
         () =>
         {
             OnTakenRewardAmount();
@@ -102,7 +102,7 @@ public class GameOverReward : BaseGameBehaviour
                 normalButton.gameObject.SetActive(false);
                 claim2XButton.gameObject.SetActive(false);
                 //gameplayData.previousLevelEaring = (int)doubleReward;
-                gameManager.currencyMainSystem.AddCurrency(doubleReward, Vector3.zero, gameManager.gameCustomUI.transform, 5, 0.75f,
+                gameManager.currencyMainSystem.AddCurrency(doubleReward, Vector3.zero, false, gameManager.gameCustomUI.transform, 5, 0.75f,
                 () =>
                 {
                     OnTakenRewardAmount();
@@ -111,16 +111,11 @@ public class GameOverReward : BaseGameBehaviour
 
         });
     }
-
     public void OnTakenRewardAmount()
     {
         SaveGame();
 
-        int index = gameManager.GetModedLevelNumber() + 1;
-#if PUBLISHER_SDK_INSTALLED
-        index++;
-#endif
-        FoxTools.sceneManager.LoadLevel(index);
+        gameManager.NextLevel();
     }
 
     #endregion ALL SELF DECLARE FUNCTIONS

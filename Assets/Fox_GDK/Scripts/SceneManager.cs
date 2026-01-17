@@ -25,7 +25,7 @@ namespace Com.FunFox.Utility
     [RequireComponent(typeof(Animator))]
     public class SceneManager : FoxObject
     {
-        public KV_Scene_Transition_Type kV_Scene_Transition_Type;
+        public Fox_Scene_Transition_Type kV_Scene_Transition_Type;
 
         public Image cutoffTex;
         public List<Texture> cutoffSprites;
@@ -52,7 +52,7 @@ namespace Com.FunFox.Utility
         const string SlideOut = "SlideOut";
         const string SlideIn = "SlideIn";
 
-        LoadSceneType loadLevelType;
+        Fox_LoadSceneType loadLevelType;
         internal static Action sceneLoaded;
 
         public override void Awake()
@@ -96,15 +96,15 @@ namespace Com.FunFox.Utility
             {
                 switch (kV_Scene_Transition_Type)
                 {
-                    case KV_Scene_Transition_Type.FADE:
+                    case Fox_Scene_Transition_Type.FADE:
                         transitionType = transitionIn ? FadeIn : FadeOut;
                         SceneFadeanimator.SetTrigger(transitionType);
                         break;
-                    case KV_Scene_Transition_Type.SHATTER_ANIMATION:
+                    case Fox_Scene_Transition_Type.SHATTER_ANIMATION:
                         transitionType = transitionIn ? SlideIn : SlideOut;
                         SceneFadeanimator.SetTrigger(transitionType);
                         break;
-                    case KV_Scene_Transition_Type.TEXTURE_ANIMATION:
+                    case Fox_Scene_Transition_Type.TEXTURE_ANIMATION:
                         if (transitionIn)
                         {
                             cutoffTex.material.SetFloat("_Cutoff", 1);
@@ -118,7 +118,7 @@ namespace Com.FunFox.Utility
                         else
                         {
                             cutoffTex.material.SetFloat("_Cutoff", 0);
-                            //cutoffTex.material.SetTexture("_MainTex", cutoffSprites[Random.Range(0, cutoffSprites.Count)]);
+                            //cutoffTex.normalMaterial.SetTexture("_MainTex", cutoffSprites[Random.Range(0, cutoffSprites.Count)]);
                             cutoffTex.material.DOFloat(1.1f, "_Cutoff", ConstantManager.ONE_HALF_TIME + ConstantManager.ONE_FORTH_TIME).OnComplete(() =>
                             {
                                 OnFadeOutComplete();
@@ -141,11 +141,11 @@ namespace Com.FunFox.Utility
         {
             switch (loadLevelType)
             {
-                case LoadSceneType.LOAD_BY_NAME:
+                case Fox_LoadSceneType.LOAD_BY_NAME:
 
                     UnityEngine.SceneManagement.SceneManager.LoadScene(levelToLoadByName);
                     break;
-                case LoadSceneType.LOAD_BY_INDEX:
+                case Fox_LoadSceneType.LOAD_BY_INDEX:
                     UnityEngine.SceneManagement.SceneManager.LoadScene(levelToLoadByIndex);
                     break;
             }
@@ -156,7 +156,7 @@ namespace Com.FunFox.Utility
             //owner.poolManager.ResetPoolManager();
             isBusy = true;
             levelToLoadByName = levelName;
-            loadLevelType = LoadSceneType.LOAD_BY_NAME;
+            loadLevelType = Fox_LoadSceneType.LOAD_BY_NAME;
             string trigger = GetTransitionType(true);
             //SceneFadeanimator.SetTrigger(trigger);
         }
@@ -166,7 +166,7 @@ namespace Com.FunFox.Utility
             //owner.poolManager.ResetPoolManager();
             isBusy = true;
             levelToLoadByIndex = levelIndex;
-            loadLevelType = LoadSceneType.LOAD_BY_INDEX;
+            loadLevelType = Fox_LoadSceneType.LOAD_BY_INDEX;
             string trigger = GetTransitionType(true);
             //SceneFadeanimator.SetTrigger(trigger);
         }

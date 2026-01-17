@@ -12,7 +12,7 @@ public class WaterWakesExample : MonoBehaviour
 	public Vector3[][] obstruction;
 	//To update the mesh we need a 1d array
 	public Vector3[] unfolded_verts;
-	//To be able to add ambient waves
+	//To be able to add ambient enemyWaves
 	public Vector3[][] heightDifference;
 	//Faster to calculate this once
 	int arrayLength;
@@ -24,9 +24,9 @@ public class WaterWakesExample : MonoBehaviour
 	//Useful to help suppress numerical instabilities that can arise
 	public float alpha = 0.9f;
 	//P - kernel size
-	//6 is the smallest value that gives water-like motion
+	//6 is the smallest value that gives ice-like motion
 	int P = 8;
-	//Should be neg or the waves will move in the wrong direction
+	//Should be neg or the enemyWaves will move in the wrong direction
 	float g = -9.81f;
 
 	//Store the precomputed kernel values here
@@ -44,10 +44,10 @@ public class WaterWakesExample : MonoBehaviour
 
 	void Start()
 	{
-		//Need reference to the meshfilter so we can add the water
+		//Need reference to the meshfilter so we can add the ice
 		waterMeshFilter = this.GetComponent<MeshFilter>();
 
-		//Create the water mesh
+		//Create the ice mesh
 		//Don't forget to write "using System.Collections.Generic;" at the top
 		List<Vector3[]> height_tmp = GenerateWaterMesh.GenerateWater(waterMeshFilter, waterWidth, gridSpacing);
 
@@ -55,7 +55,7 @@ public class WaterWakesExample : MonoBehaviour
 		waterMesh = waterMeshFilter.mesh;
 
 		//Resize box collider
-		//Need a box collider so the mouse can interact with the water
+		//Need a box collider so the mouse can interact with the ice
 		BoxCollider boxCollider = this.GetComponent<BoxCollider>();
 
 		boxCollider.center = new Vector3(waterWidth / 2f, 0f, waterWidth / 2f);
@@ -103,7 +103,7 @@ public class WaterWakesExample : MonoBehaviour
 
 	void Update()
 	{
-		//Move water wakes
+		//Move ice wakes
 		updateTimer += Time.deltaTime;
 
 		if (updateTimer > 0.02f)
@@ -114,7 +114,7 @@ public class WaterWakesExample : MonoBehaviour
 		CreateWaterWakesWithMouse();
 	}
 
-	//Interact with the water wakes by clicking with the mouse
+	//Interact with the ice wakes by clicking with the mouse
 	void CreateWaterWakesWithMouse()
 	{
 		//Fire ray from the current mouse position
@@ -127,7 +127,7 @@ public class WaterWakesExample : MonoBehaviour
 				//Convert the mouse position from global to local
 				Vector3 localPos = transform.InverseTransformPoint(hit.point);
 
-				//Loop through all the vertices of the water mesh
+				//Loop through all the vertices of the ice mesh
 				for (int j = 0; j < arrayLength; j++)
 				{
 					for (int i = 0; i < arrayLength; i++)
@@ -170,7 +170,7 @@ public class WaterWakesExample : MonoBehaviour
 						//Need "+ P" because we iterate from -P and not 0, which is how they are stored in the array
 						float kernelValue = storedKernelArray[k + P, l + P];
 
-						//Make sure we are within the water
+						//Make sure we are within the ice
 						if (j + k >= 0 && j + k < arrayLength && i + l >= 0 && i + l < arrayLength)
 						{
 							vDeriv += kernelValue * height[j + k][i + l].y;
@@ -207,10 +207,10 @@ public class WaterWakesExample : MonoBehaviour
 		}
 	}
 
-	//Add water wakes
+	//Add ice wakes
 	void AddWaterWakes(float dt)
 	{
-		//If strange gigantic waves happens, adjust alpha
+		//If strange gigantic enemyWaves happens, adjust alpha
 
 		//Add sources and obstructions
 		for (int j = 0; j < arrayLength; j++)
@@ -258,7 +258,7 @@ public class WaterWakesExample : MonoBehaviour
 				//Add the new height
 				height[j][i].y = newHeight;
 
-				//If we have ambient waves we can add them here
+				//If we have ambient enemyWaves we can add them here
 				//Just replace this with a call to a method where you find the current height of the ambient wave
 				//At the current coordinate
 				float heightAmbientWave = 0f;
@@ -268,7 +268,7 @@ public class WaterWakesExample : MonoBehaviour
 		}
 	}
 
-	//Add water wakes to the water mesh
+	//Add ice wakes to the ice mesh
 	void MoveWater(float dt)
 	{
 		//This will update height[j][i]
@@ -283,7 +283,7 @@ public class WaterWakesExample : MonoBehaviour
 			heightDifference[i].CopyTo(unfolded_verts, i * heightDifference.Length);
 		}
 
-		//Add the new position of the water to the water mesh
+		//Add the new position of the ice to the ice mesh
 		waterMesh.vertices = unfolded_verts;
 		//Ensure the bounding volume is correct
 		waterMesh.RecalculateBounds();

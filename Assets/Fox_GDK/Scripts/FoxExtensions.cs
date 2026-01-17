@@ -3,6 +3,7 @@ using System.Linq;
 using UnityEngine;
 using System;
 using Random = UnityEngine.Random;
+using Com.FunFox.Utility;
 
 #if DOTWEEN
 using DG.Tweening;
@@ -10,7 +11,16 @@ using DG.Tweening;
 
 public static class FoxExtensions
 {
-    public static List<Transform> GetChildrenWithTag(this Transform transform, string tag, bool only_Immidiate_Children = true, List<Transform> childrenList = null)
+    public static void Delay_Call_After(this MonoBehaviour monoBehaviour, float delay, Action action)
+    {
+        FoxTools.Instance.functionManager.ExecuteAfterWaiting(delay, action);
+    }
+    public static void FOXE_StartAnimationWithOffset(this Animator anim, string stateName, float transitionDuration, float normalizedOffset)
+    {
+        anim.CrossFadeInFixedTime(stateName, transitionDuration, -1, normalizedOffset);
+    }
+
+    public static List<Transform> FOXE_GetChildrenWithTag(this Transform transform, string tag, bool only_Immidiate_Children = true, List<Transform> childrenList = null)
     {
         if (transform.childCount == 0)
         {
@@ -30,20 +40,20 @@ public static class FoxExtensions
             }
 
             if (!only_Immidiate_Children)
-                GetChildrenWithTag(transform.GetChild(i), tag, only_Immidiate_Children, childrenList);
+                FOXE_GetChildrenWithTag(transform.GetChild(i), tag, only_Immidiate_Children, childrenList);
         }
 
         return childrenList;
     }
 
-    public static float InverseLerp(Vector3 a, Vector3 b, Vector3 value)
+    public static float FOXE_InverseLerp(Vector3 a, Vector3 b, Vector3 value)
     {
         Vector3 AB = b - a;
         Vector3 AV = value - a;
         return Vector3.Dot(AV, AB) / Vector3.Dot(AB, AB);
     }
 
-    public static void SqueezeEffect(this Transform target, SqueezableData squeezableData, float duration, Action action = null)
+    public static void FOXE_SqueezeEffect(this Transform target, SqueezableData squeezableData, float duration, Action action = null)
     {
 #if DOTWEEN
         target.DOScale(Vector3.one.FOXE_ModifyThisVector(-squeezableData.squeezeUpValue, squeezableData.bumpUpValue, -squeezableData.squeezeUpValue), duration / 2).SetEase(Ease.InOutQuart).OnComplete(() =>
@@ -61,7 +71,7 @@ public static class FoxExtensions
 #endif
     }
 
-    public static void Shuffle<T>(this IList<T> list)
+    public static void FOXE_Shuffle<T>(this IList<T> list)
     {
         int n = list.Count;
         while (n > 1)
@@ -358,31 +368,31 @@ public static class FoxExtensions
         return go;
     }
 
-    public static float FOXE_DistanceFrom(this Transform _transform, Transform comparingTransform, KV_Axis aPAxis = KV_Axis.ALL)
+    public static float FOXE_DistanceFrom(this Transform _transform, Transform comparingTransform, Fox_Axis aPAxis = Fox_Axis.ALL)
     {
         return FOXE_DistanceFrom(_transform.position, comparingTransform.position, aPAxis);
     }
 
-    public static float FOXE_DistanceFrom(this Transform _transform, Vector3 comparingPosition, KV_Axis aPAxis = KV_Axis.ALL)
+    public static float FOXE_DistanceFrom(this Transform _transform, Vector3 comparingPosition, Fox_Axis aPAxis = Fox_Axis.ALL)
     {
         return FOXE_DistanceFrom(_transform.position, comparingPosition, aPAxis);
     }
 
-    public static float FOXE_DistanceFrom(this Vector3 _transform, Vector3 comparingPosition, KV_Axis aPAxis = KV_Axis.ALL)
+    public static float FOXE_DistanceFrom(this Vector3 _transform, Vector3 comparingPosition, Fox_Axis aPAxis = Fox_Axis.ALL)
     {
         float distance = Mathf.Infinity;
         switch (aPAxis)
         {
-            case KV_Axis.ALL:
+            case Fox_Axis.ALL:
                 distance = Vector3.Distance(_transform, comparingPosition);
                 break;
-            case KV_Axis.X:
+            case Fox_Axis.X:
                 distance = Mathf.Abs(_transform.x - comparingPosition.x);
                 break;
-            case KV_Axis.Y:
+            case Fox_Axis.Y:
                 distance = Mathf.Abs(_transform.y - comparingPosition.y);
                 break;
-            case KV_Axis.Z:
+            case Fox_Axis.Z:
                 distance = Mathf.Abs(_transform.z - comparingPosition.z);
                 break;
         }

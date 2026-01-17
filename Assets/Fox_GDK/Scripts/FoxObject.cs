@@ -5,13 +5,11 @@ using UnityEngine.Purchasing;
 [DefaultExecutionOrder(ConstantManager.FoxBehaviourOrder)]
 public class FoxObject : MonoBehaviour, IHierarchyIcon
 {
-    [HideInInspector]
-    public FoxManager foxManager;
-    [HideInInspector]
-    public FoxTools FoxTools;
+    [HideInInspector] public FoxManager foxManager;
+    [HideInInspector] public FoxTools FoxTools;
+    [HideInInspector] public GameplayData gameplayData;
+    [HideInInspector] public Camera mainCamera;
 
-    [HideInInspector]
-    public GameplayData gameplayData;
     [ReadOnlyProperty] public GameState gameState = GameState.NONE;
 
     bool registeredForInput;
@@ -21,7 +19,8 @@ public class FoxObject : MonoBehaviour, IHierarchyIcon
     public virtual void Awake()
     {
         FoxTools = FoxTools.Instance;
-        FoxManager.OnAddFoxBehaviour?.Invoke(this);
+        mainCamera = Camera.main;
+        FoxManager.OnAddFoxBehavior?.Invoke(this);
     }
 
     public virtual void Start() { }
@@ -36,7 +35,7 @@ public class FoxObject : MonoBehaviour, IHierarchyIcon
         FoxManager.OnChangeGameState += OnChangeGameState;
         FoxManager.OnCompleteTask += OnCompleteTask;
         FoxManager.OnIncompleteTask += OnIncompleteTask;
-        FoxManager.OnBoosterPreimplemented += OnBoosterPreimplemented;
+        FoxManager.OnBoosterReimplemented += OnBoosterPreimplemented;
         FoxManager.OnBoosterPurchased += OnBoosterPurchased;
         FoxManager.OnBoosterCanceled += OnBoosterCanceled;
         FoxManager.OnBoosterImplemented += OnBoosterImplemented;
@@ -47,10 +46,10 @@ public class FoxObject : MonoBehaviour, IHierarchyIcon
         {
             FoxManager.OnTap += ProccessInputTapping;
             FoxManager.OnDrag += OnDrag;
-            FoxManager.OnSwip += ProcessInputSwipping;
+            FoxManager.OnSwipe += ProcessInputSwipping;
             FoxManager.OnZoom += ProcessInputZooming;
         }
-        FoxManager.OnAddFoxBehaviour?.Invoke(this);
+        FoxManager.OnAddFoxBehavior?.Invoke(this);
         #region GAME SPECIFIC SPACE
 
 
@@ -67,7 +66,7 @@ public class FoxObject : MonoBehaviour, IHierarchyIcon
         FoxManager.OnChangeGameState -= OnChangeGameState;
         FoxManager.OnCompleteTask -= OnCompleteTask;
         FoxManager.OnIncompleteTask -= OnIncompleteTask;
-        FoxManager.OnBoosterPreimplemented -= OnBoosterPreimplemented;
+        FoxManager.OnBoosterReimplemented -= OnBoosterPreimplemented;
         FoxManager.OnBoosterPurchased -= OnBoosterPurchased;
         FoxManager.OnBoosterCanceled -= OnBoosterCanceled;
         FoxManager.OnBoosterImplemented -= OnBoosterImplemented;
@@ -78,7 +77,7 @@ public class FoxObject : MonoBehaviour, IHierarchyIcon
         {
             FoxManager.OnTap -= ProccessInputTapping;
             FoxManager.OnDrag -= OnDrag;
-            FoxManager.OnSwip -= ProcessInputSwipping;
+            FoxManager.OnSwipe -= ProcessInputSwipping;
             FoxManager.OnZoom -= ProcessInputZooming;
         }
 
@@ -151,41 +150,41 @@ public class FoxObject : MonoBehaviour, IHierarchyIcon
         OnZoom(zoom);
     }
 
-    void ProccessInputTapping(KV_TappingType inputType, Vector3 tapOnWorldSpace)
+    void ProccessInputTapping(Fox_TappingType inputType, Vector3 tapOnWorldSpace)
     {
         switch (inputType)
         {
-            case KV_TappingType.NONE:
+            case Fox_TappingType.NONE:
                 break;
-            case KV_TappingType.TAP_START:
+            case Fox_TappingType.TAP_START:
                 OnTapStart(tapOnWorldSpace);
                 break;
-            case KV_TappingType.TAP_END:
+            case Fox_TappingType.TAP_END:
                 OnTapEnd(tapOnWorldSpace);
                 break;
-            case KV_TappingType.SINGLE_TAP:
+            case Fox_TappingType.SINGLE_TAP:
                 OnSingleTap(tapOnWorldSpace);
                 break;
-            case KV_TappingType.TAP_N_HOLD:
+            case Fox_TappingType.TAP_N_HOLD:
                 OnTapAndHold(tapOnWorldSpace);
                 break;
         }
     }
 
-    void ProcessInputSwipping(KV_SwippingType swippingType)
+    void ProcessInputSwipping(Fox_SwippingType swippingType)
     {
         switch (swippingType)
         {
-            case KV_SwippingType.SWIPE_UP:
+            case Fox_SwippingType.SWIPE_UP:
                 OnSwipeUp();
                 break;
-            case KV_SwippingType.SWIPE_DOWN:
+            case Fox_SwippingType.SWIPE_DOWN:
                 OnSwipeDown();
                 break;
-            case KV_SwippingType.SWIPE_LEFT:
+            case Fox_SwippingType.SWIPE_LEFT:
                 OnSwipeLeft();
                 break;
-            case KV_SwippingType.SWIPE_RIGHT:
+            case Fox_SwippingType.SWIPE_RIGHT:
                 OnSwipeRight();
                 break;
         }

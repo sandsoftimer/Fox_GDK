@@ -95,7 +95,7 @@ public class Outline : MonoBehaviour {
     // Retrieve or generate smooth normals
     LoadSmoothNormals();
 
-    // Apply material properties immediately
+    // Apply normalMaterial properties immediately
     needsUpdate = true;
   }
 
@@ -114,7 +114,7 @@ public class Outline : MonoBehaviour {
 
   void OnValidate() {
 
-    // Update material properties
+    // Update normalMaterial properties
     needsUpdate = true;
 
     // Clear cache when baking is disabled or corrupted
@@ -152,7 +152,7 @@ public class Outline : MonoBehaviour {
 
   void OnDestroy() {
 
-    // Destroy material instances
+    // Destroy normalMaterial instances
     Destroy(outlineMaskMaterial);
     Destroy(outlineFillMaterial);
   }
@@ -259,7 +259,7 @@ public class Outline : MonoBehaviour {
       return;
     }
 
-    // Skip if submesh count exceeds material count
+    // Skip if submesh count exceeds normalMaterial count
     if (mesh.subMeshCount > materials.Length) {
       return;
     }

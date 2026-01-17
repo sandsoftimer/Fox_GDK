@@ -74,14 +74,14 @@ public class CurrencySystem : FoxObject
         IncreaseCurrency(value, animationDuration);
     }
 
-    public void AddCurrency(ulong value, Vector3 worldSpacePoint, Transform uiParent, int uiCount, float animationDuration = 2, Action action = null)
+    public void AddCurrency(ulong value, Vector3 worldSpacePoint, bool isThisWorldSpacePoint, Transform uiParent, int uiCount, float animationDuration = 2, Action action = null)
     {
-        StartCoroutine(CollectCurrencyIcon(value, worldSpacePoint, uiParent, uiCount, animationDuration, action));
+        StartCoroutine(CollectCurrencyIcon(value, worldSpacePoint, isThisWorldSpacePoint, uiParent, uiCount, animationDuration, action));
     }
 
-    IEnumerator CollectCurrencyIcon(ulong value, Vector3 worldSpacePoint, Transform uiParent, int uiCount, float animationDuration, Action action)
+    IEnumerator CollectCurrencyIcon(ulong value, Vector3 worldSpacePoint, bool isThisWorldSpacePoint, Transform uiParent, int uiCount, float animationDuration, Action action)
     {
-        Vector3 screenPoint = Camera.main.WorldToScreenPoint(worldSpacePoint);
+        Vector3 screenPoint = isThisWorldSpacePoint ? Camera.main.WorldToScreenPoint(worldSpacePoint) : worldSpacePoint;
 
         for (int i = 0; i < uiCount; i++)
         {

@@ -1,29 +1,82 @@
+using UnityEditor;
 using UnityEngine;
 
-public class LookAtCamera : MonoBehaviour
+public class LookAtCamera : FoxObject
 {
+    public Fox_Axis axis;
     public Vector3 offset = Vector3.zero;
     public bool useCustomCamera;
-    Camera _camera;
+    public Camera _camera;
 
     public Camera sceneCam
     {
         get
         {
             if (_camera == null)
-                _camera = Camera.main;
+                _camera = mainCamera;
             return _camera;
         }
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-    }
-
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        transform.LookAt(sceneCam.transform.position - offset);
+        transform.LookAt(sceneCam.transform.position - offset, Vector3.up);
     }
 }
+
+#region FOX EDITOR MAKER
+#if UNITY_EDITOR
+
+[CustomEditor(typeof(LookAtCamera))]
+public class LookAtCameraEditor : FoxEditor
+{
+    private LookAtCamera targetScript;
+
+    // All SerializedProperties
+    #region ALL_PUBLIC_PROPERTIES
+    private SerializedProperty offset;
+    private SerializedProperty useCustomCamera;
+    private SerializedProperty _camera;
+    private SerializedProperty foxManager;
+    private SerializedProperty foxTools;
+    private SerializedProperty gameplayData;
+    private SerializedProperty mainCamera;
+    private SerializedProperty gameState;
+    #endregion ALL_PUBLIC_PROPERTIES
+
+    bool drawProperties = true;
+    public void OnEnable()
+    {
+        targetScript = (LookAtCamera)target;
+
+        #region FINDER_ALL_PUBLIC_PROPERTIES
+        offset = serializedObject.FindProperty("offset");
+        useCustomCamera = serializedObject.FindProperty("useCustomCamera");
+        _camera = serializedObject.FindProperty("_camera");
+        foxManager = serializedObject.FindProperty("foxManager");
+        foxTools = serializedObject.FindProperty("FoxTools");
+        gameplayData = serializedObject.FindProperty("gameplayData");
+        mainCamera = serializedObject.FindProperty("mainCamera");
+        gameState = serializedObject.FindProperty("gameState");
+        #endregion FINDER_ALL_PUBLIC_PROPERTIES
+    }
+
+    public override void OnInspectorGUI()
+    {
+        serializedObject.Update();
+
+
+        DrawProperty(offset);
+        DrawProperty(useCustomCamera);
+        if (targetScript.useCustomCamera)
+        {
+            DrawProperty(_camera);
+        }
+
+
+        serializedObject.ApplyModifiedProperties();
+    }
+}
+#endif
+#endregion FOX EDITOR MAKER

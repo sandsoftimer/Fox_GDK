@@ -177,7 +177,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 311737044}
-  - component: {fileID: 311737043}
+  - component: {fileID: 311737045}
   m_Layer: 0
   m_Name: PlayerController
   m_TagString: Untagged
@@ -185,7 +185,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &311737043
+--- !u!4 &311737044
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 311737042}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &311737045
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -194,10 +209,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 311737042}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d96320fc837dc42498835175b7810ff6, type: 3}
+  m_Script: {fileID: 11500000, guid: 6449cc45a7e3bcb4487c53d1ae6a74a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  foxManager: {fileID: 1195376071}
+  foxManager: {fileID: 0}
   FoxTools: {fileID: 0}
   gameplayData:
     numberOfSlot: 2
@@ -216,14 +231,17 @@ MonoBehaviour:
     Is_Hammer_Tap_Mood: 0
     Is_Magnet_Tap_Mood: 0
     gameScore: 0
-    currentLevelNumber: 3
+    currentLevelNumber: 0
     retryAttemptNumber: 1
     reviveAttemptNumber: 1
     softFailAttemptNumber: 1
     commonAttempt: 1
-    gameStartTime: 0.019999992
-    gameEndTime: 20.116783
-    totalLevelCompletedTime: 6.3422184
+    remainningIces: 0
+    remainningSnails: 0
+    remainningExplosion: 0
+    gameStartTime: 0
+    gameEndTime: 0
+    totalLevelCompletedTime: 0
     totalCoin: 0
     healthBaseValue: 100
     healthValueIncreaser: 20
@@ -231,40 +249,15 @@ MonoBehaviour:
     damageBaseValue: 10
     damageValueIncreaser: 2
     damageUpgradeLevel: 0
-    gameoverSuccess: 1
-    soundEffectOn: 0
+    gameoverSuccess: 0
+    soundEffectOn: 1
     backgroundMusicOn: 1
     vibrationEffectOn: 1
     tutorial_Tap_Blocker: 0
     current_Level_Data: {fileID: 0}
-  gameState: 2
-  booste_3D_Prefab: {fileID: 1609852028175569269, guid: 451f8a5cce9e2a145974a6ce66c236fa, type: 3}
---- !u!4 &311737044
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 311737042}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &679313867 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5790756338539560541, guid: 0fbeafbe119786140aae6771b24d237a, type: 3}
-  m_PrefabInstance: {fileID: 1659694442278027199}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d79252200958e9419e85497e4f68ef4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  mainCamera: {fileID: 0}
+  gameState: 0
+  booste_3D_Prefab: {fileID: 8631457054112208599, guid: edd70426dd1037e4fbc03e844f15882d, type: 3}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -375,23 +368,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_Version: 4
   m_UsePipelineSettings: 1
   m_AdditionalLightsShadowResolutionTier: 2
+  m_LightLayerMask: 1
+  m_RenderingLayers: 1
   m_CustomShadowLayers: 0
+  m_ShadowLayerMask: 1
+  m_ShadowRenderingLayers: 1
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 0
-  m_RenderingLayersMask:
-    serializedVersion: 0
-    m_Bits: 1
-  m_ShadowRenderingLayersMask:
-    serializedVersion: 0
-    m_Bits: 1
-  m_Version: 4
-  m_LightLayerMask: 1
-  m_ShadowLayerMask: 1
-  m_RenderingLayers: 1
-  m_ShadowRenderingLayers: 1
 --- !u!1 &1171378151
 GameObject:
   m_ObjectHideFlags: 0
@@ -453,8 +440,6 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
-  m_ForceMeshLod: -1
-  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -476,7 +461,6 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
@@ -504,17 +488,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1195376071 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3786818123842775928, guid: 4f8d005f4f104dc419d68282cb433fdc, type: 3}
-  m_PrefabInstance: {fileID: 1773751989}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b01b307b453179c478d81e32a25716a6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1773751989
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -526,7 +499,7 @@ PrefabInstance:
     - target: {fileID: 3786818123842775928, guid: 4f8d005f4f104dc419d68282cb433fdc, type: 3}
       propertyPath: maskManager
       value: 
-      objectReference: {fileID: 679313867}
+      objectReference: {fileID: 0}
     - target: {fileID: 4451429369170011815, guid: 4f8d005f4f104dc419d68282cb433fdc, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0

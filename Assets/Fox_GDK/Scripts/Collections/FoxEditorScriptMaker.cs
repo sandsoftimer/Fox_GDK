@@ -110,7 +110,7 @@ public static class FoxEditorScriptMaker
     [MenuItem("Assets/FoxTools/Add\\Update_FoxEditor_Outside", true)]
     private static bool FoxEditorScriptValidation()
     {
-        // This returns true when the selected object is an C# (the menu item will be disabled otherwise).
+        // This returns true when the selected object is an _C# (the menu item will be disabled otherwise).
         selectedScriptName = Selection.activeObject.name;
         selectedScriptPath = AssetDatabase.GetAssetPath(Selection.activeObject);
         return Selection.activeObject is MonoScript || Selection.activeObject is ScriptableObject;

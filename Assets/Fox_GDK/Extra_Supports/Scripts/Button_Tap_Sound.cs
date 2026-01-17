@@ -23,8 +23,8 @@ public class Button_Tap_Sound : BaseGameBehaviour
         {
             gameObject.GetComponent<Button>().onClick.AddListener(() =>
             {
-                if (gameManager.ButtonTapSound)
-                    gameManager.ButtonTapSound.Play();
+                if (AudioManager.instance.ButtonTapSound)
+                    AudioManager.instance.ButtonTapSound.Play();
             });
         }
     }

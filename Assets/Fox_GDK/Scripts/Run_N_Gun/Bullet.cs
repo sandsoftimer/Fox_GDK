@@ -1,20 +1,22 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
 using UnityEngine;
-using System;
 
 public class Bullet : FoxObject
 {
     public BulletData bulletData;
+    public GameObject vfx;
+    public GameObject bulletTrail;
+    public new Collider collider;
+
+    TrailRenderer trail;
+    BulletData preservedData;
+    Fox_WeaponType weaponType;
+    LayerMask collisionMask;
+    Action OnBulletHitAction;
+    AudioSource audioSource;
+    Vector3 startingPosition;
 
     float remainingTravelLength;
-    TrailRenderer trail;
-    Vector3 startingPosition;
-    public new Collider collider;
-    BulletData preservedData;
-    WeaponType weaponType;
-
-    Action OnBulletHitAction;
 
     #region ALL UNITY FUNCTIONS
 
@@ -26,6 +28,15 @@ public class Bullet : FoxObject
         preservedData = bulletData.ExtractData();
         trail = GetComponent<TrailRenderer>();
         collider = GetComponent<Collider>();
+        if (preservedData.onHitSoundClip)
+        {
+            audioSource = GetComponent<AudioSource>();
+            if (audioSource == null) audioSource = gameObject.AddComponent<AudioSource>();
+            audioSource.loop = false;
+            audioSource.playOnAwake = false;
+            audioSource.clip = preservedData.onHitSoundClip;
+        }
+
     }
 
     // Start is called before the first frame update
@@ -39,7 +50,9 @@ public class Bullet : FoxObject
         base.OnEnable();
 
         bulletData = preservedData.ExtractData();
-        if(collider)
+        vfx.SetActive(true);
+        bulletTrail.SetActive(true);
+        if (collider)
             collider.enabled = true;
         startingPosition = transform.position;
 
@@ -63,12 +76,6 @@ public class Bullet : FoxObject
 
     void Update()
     {
-        //if (gameState.Equals(GameState.GAME_INITIALIZED) && Input.GetMouseButtonDown(0))
-        //{
-        //    gameManager.ChangeGameState(GameState.GAME_PLAY_STARTED);
-        //    gameState = GameState.GAME_PLAY_STARTED;
-        //}
-
         if (!gameState.Equals(GameState.GAME_PLAY_STARTED))
             return;
 
@@ -79,21 +86,19 @@ public class Bullet : FoxObject
         if (!gameState.Equals(GameState.GAME_PLAY_STARTED))
             return;
 
-        if (weaponType.Equals(WeaponType.GUN))
+        if (weaponType.Equals(Fox_WeaponType.GUN))
         {
             transform.position += bulletData.bulletSpeed * Time.fixedDeltaTime * transform.forward;
             if ((startingPosition - transform.position).magnitude >= bulletData.travelLength)
             {
-                OnBulletHitAction?.Invoke();
                 FoxTools.poolManager.Destroy(gameObject);
             }
         }
-        else if(weaponType.Equals(WeaponType.MELEE))
+        else if (weaponType.Equals(Fox_WeaponType.MELEE))
         {
             bulletData.travelLength -= bulletData.bulletSpeed;
             if (bulletData.travelLength <= 0)
             {
-                OnBulletHitAction?.Invoke();
                 FoxTools.poolManager.Destroy(gameObject);
             }
         }
@@ -104,11 +109,12 @@ public class Bullet : FoxObject
         if (!gameState.Equals(GameState.GAME_PLAY_STARTED))
             return;
 
-        Health health = other.GetComponent<Health>();
-        if (health != null)
-        {            
-            health.Damage(bulletData.bulletDefaultDamage + bulletData.bulletAdditionalDamage);
-        }
+        if (!collisionMask.FOXE_IsInLayerMask(other.gameObject))
+            return;
+
+        collider.enabled = false;
+        vfx.SetActive(false);
+        bulletTrail.SetActive(false);
         FoxTools.poolManager.Destroy(gameObject);
     }
 
@@ -127,10 +133,11 @@ public class Bullet : FoxObject
     //=================================
     #region ALL SELF DECLARE FUNCTIONS
 
-    public void Initialize(BulletData bulletData, WeaponType weaponType, Action OnBulletHitAction = null)
+    public void Initialize(BulletData bulletData, Fox_WeaponType weaponType, LayerMask collisionMask, Action OnBulletHitAction = null)
     {
         this.bulletData = bulletData;
         this.weaponType = weaponType;
+        this.collisionMask = collisionMask;
         this.OnBulletHitAction = OnBulletHitAction;
     }
 
