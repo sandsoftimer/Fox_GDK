@@ -1,4 +1,4 @@
-name: Test Build - platform-specific build
+name: Test Build - no space left on device
 
 on:
   push:
@@ -22,6 +22,16 @@ jobs:
         fetch-depth: 0
         lfs: true
     
+    - name: Free Disk Space
+      uses: jlumbroso/free-disk-space@main
+      with:
+        tool-cache: false
+        android: true
+        dotnet: true
+        haskell: true
+        large-packages: true
+        swap-storage: true
+    
     - uses: actions/cache@v3
       with:
         path: Library
@@ -41,6 +51,7 @@ jobs:
       with:
         targetPlatform: ${{ matrix.targetPlatform }}
         buildMethod: UnityBuilderAction.BuildScript.Build
+        unityVersion: 2022.3.10f1
     
     - uses: actions/upload-artifact@v4
       with:

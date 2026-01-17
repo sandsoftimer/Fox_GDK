@@ -75,6 +75,16 @@ jobs:
         fetch-depth: 0
         lfs: true
     
+    - name: Free Disk Space
+      uses: jlumbroso/free-disk-space@main
+      with:
+        tool-cache: false
+        android: true
+        dotnet: true
+        haskell: true
+        large-packages: true
+        swap-storage: true
+    
     - uses: actions/cache@v3
       with:
         path: Library
@@ -94,6 +104,7 @@ jobs:
       with:
         targetPlatform: ${{{{ matrix.targetPlatform }}}}
         buildMethod: UnityBuilderAction.BuildScript.Build
+        unityVersion: 2022.3.10f1
     
     - uses: actions/upload-artifact@v4
       with:
@@ -126,6 +137,16 @@ jobs:
         fetch-depth: 0
         lfs: true
     
+    - name: Free Disk Space
+      uses: jlumbroso/free-disk-space@main
+      with:
+        tool-cache: false
+        android: true
+        dotnet: true
+        haskell: true
+        large-packages: true
+        swap-storage: true
+    
     - uses: actions/cache@v3
       with:
         path: Library
@@ -147,6 +168,7 @@ jobs:
         buildMethod: UnityBuilderAction.BuildScript.Build
         versioning: Custom
         version: ${{{{ github.event.inputs.version }}}}
+        unityVersion: 2022.3.10f1
     
     - uses: actions/upload-artifact@v4
       with:
