@@ -1,3 +1,4 @@
+#if UNITY_EDITOR
 using System.IO;
 using UnityEditor;
 using UnityEngine;
@@ -85,6 +86,12 @@ jobs:
         large-packages: true
         swap-storage: true
     
+    - name: Install TextMeshPro
+      run: |
+        echo 'Installing TextMeshPro package...'
+        mkdir -p Packages
+        echo '{{""dependencies"":{{""com.unity.textmeshpro"":""3.0.6""}}}}' > Packages/manifest.json
+    
     - uses: actions/cache@v3
       with:
         path: Library
@@ -143,6 +150,12 @@ jobs:
         large-packages: true
         swap-storage: true
     
+    - name: Install TextMeshPro
+      run: |
+        echo 'Installing TextMeshPro package...'
+        mkdir -p Packages
+        echo '{{""dependencies"":{{""com.unity.textmeshpro"":""3.0.6""}}}}' > Packages/manifest.json
+    
     - uses: actions/cache@v3
       with:
         path: Library
@@ -184,3 +197,4 @@ jobs:
             "• UNITY_PASSWORD", "OK");
     }
 }
+#endif

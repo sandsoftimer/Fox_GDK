@@ -1,4 +1,4 @@
-name: Test Build - Removed the problematic packages
+name: Test Build - Local Build Successful
 
 on:
   push:
@@ -31,6 +31,12 @@ jobs:
         haskell: true
         large-packages: true
         swap-storage: true
+    
+    - name: Install TextMeshPro
+      run: |
+        echo 'Installing TextMeshPro package...'
+        mkdir -p Packages
+        echo '{"dependencies":{"com.unity.textmeshpro":"3.0.6"}}' > Packages/manifest.json
     
     - uses: actions/cache@v3
       with:
