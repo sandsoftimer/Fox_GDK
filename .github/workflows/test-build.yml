@@ -1,4 +1,4 @@
-name: Test Build - Local Build Successful
+name: Test Build - M Packages/manifest.json
 
 on:
   push:
@@ -21,22 +21,6 @@ jobs:
       with:
         fetch-depth: 0
         lfs: true
-    
-    - name: Free Disk Space
-      uses: jlumbroso/free-disk-space@main
-      with:
-        tool-cache: false
-        android: true
-        dotnet: true
-        haskell: true
-        large-packages: true
-        swap-storage: true
-    
-    - name: Install TextMeshPro
-      run: |
-        echo 'Installing TextMeshPro package...'
-        mkdir -p Packages
-        echo '{"dependencies":{"com.unity.textmeshpro":"3.0.6"}}' > Packages/manifest.json
     
     - uses: actions/cache@v3
       with:
