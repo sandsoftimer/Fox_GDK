@@ -57,7 +57,7 @@ namespace Com.FunFox.Utility
 
             float timestep = Time.fixedDeltaTime / Physics.defaultSolverVelocityIterations;
             Vector3 gravityAccel = Physics.gravity * 1 * timestep * timestep;
-            float drag = 1f - timestep * rigidbody.linearDamping;
+            float drag = 1f - timestep * rigidbody.drag;
             Vector3 moveStep = velocity * timestep;
 
             for (int i = 0; i < steps; ++i)
@@ -78,7 +78,7 @@ namespace Com.FunFox.Utility
 
             float timestep = Time.fixedDeltaTime / Physics.defaultSolverVelocityIterations;
             Vector3 gravityAccel = Physics.gravity * 1 * timestep * timestep;
-            float drag = 1f - timestep * rigidbody.linearDamping;
+            float drag = 1f - timestep * rigidbody.drag;
             Vector3 moveStep = velocity * timestep;
 
             results[0] = pos;

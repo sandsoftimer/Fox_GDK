@@ -86,8 +86,8 @@ public class CurrencySystem : FoxObject
         for (int i = 0; i < uiCount; i++)
         {
             int index = i;
-            //GameObject go = FoxTools.poolManager.Instantiate(colletiveCurrencyPrefab, worldSpacePoint + FoxExtensions.FOXE_GetRandomDirection3D() * 200, Quaternion.identity, uiParent);
-            GameObject go = FoxTools.poolManager.Instantiate(colletiveCurrencyPrefab, screenPoint, Quaternion.identity, uiParent);
+            //GameObject go = foxTools.poolManager.Instantiate(colletiveCurrencyPrefab, worldSpacePoint + FoxExtensions.FOXE_GetRandomDirection3D() * 200, Quaternion.identity, uiParent);
+            GameObject go = foxTools.poolManager.Instantiate(colletiveCurrencyPrefab, screenPoint, Quaternion.identity, uiParent);
             go.GetComponent<RectTransform>().position = screenPoint + FoxExtensions.FOXE_GetRandomDirection3D() * 200;
             go.transform.DOMove(iconImageUI.transform.position, animationDuration).OnComplete(() =>
             {

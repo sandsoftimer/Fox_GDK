@@ -135,7 +135,7 @@ public class Weapon : FoxObject
         GameObject bulletObj;
         for (int i = 0; i < bulletSpawnPoints.Length; i++)
         {
-            bulletObj = FoxTools.poolManager.Instantiate(
+            bulletObj = foxTools.poolManager.Instantiate(
                 weaponData.bulletPrefab,
                 bulletSpawnPoints[i].position,
                 directionPoint == null ? bulletSpawnPoints[i].rotation :

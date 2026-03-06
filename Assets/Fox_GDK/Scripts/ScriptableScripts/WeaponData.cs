@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "WeaponData", menuName = "FoxTools/Inventory/WeaponData")]
+[CreateAssetMenu(fileName = "WeaponData", menuName = "foxTools/Inventory/WeaponData")]
 public class WeaponData : ScriptableObject
 {
     public string weaponName = "Weapon Name is not defined";

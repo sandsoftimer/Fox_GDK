@@ -33,7 +33,7 @@ public class OffScreenHandler : FoxObject
         //showOffScreenIndicator = false;
 
         if (offScreenIndicator)
-            FoxTools.poolManager.Destroy(offScreenIndicator);
+            foxTools.poolManager.Destroy(offScreenIndicator);
 
         offScreenIndicator = null;
     }
@@ -54,7 +54,7 @@ public class OffScreenHandler : FoxObject
             mainCam = Camera.main;
 
         if (canvasParent == null)
-            canvasParent = FoxTools.canvasManager.canvas.transform;
+            canvasParent = foxTools.canvasManager.canvas.transform;
     }
 
     void FixedUpdate()
@@ -75,7 +75,7 @@ public class OffScreenHandler : FoxObject
             {
                 if (offScreenIndicator == null)
                 {
-                    offScreenIndicator = FoxTools.poolManager.Instantiate(offScreenUIIndicatorPrefab, Vector2.zero, Quaternion.identity, canvasParent);
+                    offScreenIndicator = foxTools.poolManager.Instantiate(offScreenUIIndicatorPrefab, Vector2.zero, Quaternion.identity, canvasParent);
                     offScreenIndicator.transform.localScale = Vector3.one;
                 }
                 Vector2 point;
@@ -93,7 +93,7 @@ public class OffScreenHandler : FoxObject
             {
                 if (offScreenIndicator != null)
                 {
-                    FoxTools.poolManager.Destroy(offScreenIndicator);
+                    foxTools.poolManager.Destroy(offScreenIndicator);
                     offScreenIndicator = null;
                 }
             }
@@ -102,7 +102,7 @@ public class OffScreenHandler : FoxObject
         {
             if (offScreenIndicator != null)
             {
-                FoxTools.poolManager.Destroy(offScreenIndicator);
+                foxTools.poolManager.Destroy(offScreenIndicator);
                 offScreenIndicator = null;
             }
         }
@@ -122,7 +122,7 @@ public class OffScreenHandler : FoxObject
     //    showOffScreenIndicator = false;
 
     //    if (offScreenIndicator)
-    //        FoxTools.poolManager.Destroy(offScreenIndicator);
+    //        foxTools.poolManager.Destroy(offScreenIndicator);
 
     //    offScreenIndicator = null;
     //    Destroy(this);

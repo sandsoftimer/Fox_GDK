@@ -131,11 +131,11 @@ public class Booste_3D_Controller : BaseGameBehaviour
                 //{
                 //    particles[(int)currentActiveBooster.type].Play();
 
-                //    FoxTools.functionManager.ExecuteAfterWaiting(ConstantManager.ONE_FORTH_TIME, () =>
+                //    foxTools.functionManager.ExecuteAfterWaiting(ConstantManager.ONE_FORTH_TIME, () =>
                 //    {
                 //        particles[(int)currentActiveBooster.type].Stop();
                 //        Oncomplete?.Invoke();
-                //        FoxTools.functionManager.ExecuteAfterWaiting(ConstantManager.ONE_FORTH_TIME, () =>
+                //        foxTools.functionManager.ExecuteAfterWaiting(ConstantManager.ONE_FORTH_TIME, () =>
                 //        {
                 //            vfx.DOLocalRotate(new Vector3(45, 10, 0), ConstantManager.ONE_FORTH_TIME / 2).OnComplete(() =>
                 //            {

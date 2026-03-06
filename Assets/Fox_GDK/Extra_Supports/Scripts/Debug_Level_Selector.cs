@@ -90,7 +90,7 @@ public class Debug_Level_Selector : BaseGameBehaviour
 #if PUBLISHER_SDK_INSTALLED
         index++;
 #endif
-        FoxTools.sceneManager.LoadLevel(index + 1);
+        foxTools.sceneManager.LoadLevel(index + 1);
     }
 
     private void Load_Previous_Level()

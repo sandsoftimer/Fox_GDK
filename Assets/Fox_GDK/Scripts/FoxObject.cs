@@ -6,7 +6,7 @@ using UnityEngine.Purchasing;
 public class FoxObject : MonoBehaviour, IHierarchyIcon
 {
     [HideInInspector] public FoxManager foxManager;
-    [HideInInspector] public FoxTools FoxTools;
+    [HideInInspector] public FoxTools foxTools;
     [HideInInspector] public GameplayData gameplayData;
     [HideInInspector] public Camera mainCamera;
 
@@ -18,9 +18,9 @@ public class FoxObject : MonoBehaviour, IHierarchyIcon
 
     public virtual void Awake()
     {
-        FoxTools = FoxTools.Instance;
+        foxTools = FoxTools.Instance;
         mainCamera = Camera.main;
-        FoxManager.OnAddFoxBehavior?.Invoke(this);
+        FoxManager.OnAddFoxBehaviour?.Invoke(this);
     }
 
     public virtual void Start() { }
@@ -35,7 +35,7 @@ public class FoxObject : MonoBehaviour, IHierarchyIcon
         FoxManager.OnChangeGameState += OnChangeGameState;
         FoxManager.OnCompleteTask += OnCompleteTask;
         FoxManager.OnIncompleteTask += OnIncompleteTask;
-        FoxManager.OnBoosterReimplemented += OnBoosterPreimplemented;
+        FoxManager.OnBoosterPreimplemented += OnBoosterPreimplemented;
         FoxManager.OnBoosterPurchased += OnBoosterPurchased;
         FoxManager.OnBoosterCanceled += OnBoosterCanceled;
         FoxManager.OnBoosterImplemented += OnBoosterImplemented;
@@ -46,10 +46,10 @@ public class FoxObject : MonoBehaviour, IHierarchyIcon
         {
             FoxManager.OnTap += ProccessInputTapping;
             FoxManager.OnDrag += OnDrag;
-            FoxManager.OnSwipe += ProcessInputSwipping;
+            FoxManager.OnSwip += ProcessInputSwipping;
             FoxManager.OnZoom += ProcessInputZooming;
         }
-        FoxManager.OnAddFoxBehavior?.Invoke(this);
+        FoxManager.OnAddFoxBehaviour?.Invoke(this);
         #region GAME SPECIFIC SPACE
 
 
@@ -66,7 +66,7 @@ public class FoxObject : MonoBehaviour, IHierarchyIcon
         FoxManager.OnChangeGameState -= OnChangeGameState;
         FoxManager.OnCompleteTask -= OnCompleteTask;
         FoxManager.OnIncompleteTask -= OnIncompleteTask;
-        FoxManager.OnBoosterReimplemented -= OnBoosterPreimplemented;
+        FoxManager.OnBoosterPreimplemented -= OnBoosterPreimplemented;
         FoxManager.OnBoosterPurchased -= OnBoosterPurchased;
         FoxManager.OnBoosterCanceled -= OnBoosterCanceled;
         FoxManager.OnBoosterImplemented -= OnBoosterImplemented;
@@ -77,7 +77,7 @@ public class FoxObject : MonoBehaviour, IHierarchyIcon
         {
             FoxManager.OnTap -= ProccessInputTapping;
             FoxManager.OnDrag -= OnDrag;
-            FoxManager.OnSwipe -= ProcessInputSwipping;
+            FoxManager.OnSwip -= ProcessInputSwipping;
             FoxManager.OnZoom -= ProcessInputZooming;
         }
 

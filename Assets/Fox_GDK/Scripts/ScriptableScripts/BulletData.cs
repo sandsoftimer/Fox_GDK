@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "BulletData", menuName = "FoxTools/Inventory/BulletData")]
+[CreateAssetMenu(fileName = "BulletData", menuName = "foxTools/Inventory/BulletData")]
 public class BulletData : ScriptableObject
 {
     public float bulletSpeed;

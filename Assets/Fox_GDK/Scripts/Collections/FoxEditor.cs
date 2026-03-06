@@ -1,6 +1,5 @@
 ﻿#if UNITY_EDITOR
 using System;
-using Unity.VisualScripting.ReorderableList;
 using UnityEditor;
 using UnityEngine;
 
@@ -10,13 +9,6 @@ public class FoxEditor : Editor
     {
         Space();
         EditorGUILayout.PropertyField(propertyName);
-    }
-
-    protected void DrawList(SerializedProperty propertyName)
-    {
-        Space();
-        ReorderableListGUI.Title($"{nameof(propertyName)}");
-        ReorderableListGUI.ListField(propertyName);
     }
 
     protected GUIStyle GetButtonStyle(EditorButtonStyle editorButtonStyle)

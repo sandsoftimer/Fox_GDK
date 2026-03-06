@@ -16,7 +16,7 @@
 //        }
 //    }
 
-//    [MenuItem("FoxTools/Extra/Game Constants")]
+//    [MenuItem("foxTools/Extra/Game Constants")]
 //    public static void ShowWindow()
 //    {
 //        GetWindow<Custom_Constant_Window>("Game Constants");

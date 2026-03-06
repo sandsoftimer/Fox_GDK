@@ -11,7 +11,7 @@ public static class FoxEditorScriptMaker
     private static string selectedScriptPath = "";
     private static string selectedScriptName = "";
 
-    [MenuItem("Assets/FoxTools/Add\\Update_FoxEditor_Outside")]
+    [MenuItem("Assets/foxTools/Add\\Update_FoxEditor_Outside")]
     private static void FoxEditorScript()
     {
         Type t = Type.GetType(Selection.activeObject.name);
@@ -107,7 +107,7 @@ public static class FoxEditorScriptMaker
     }
 
     // Note that we pass the same path, and also pass "true" to the second argument for validation.
-    [MenuItem("Assets/FoxTools/Add\\Update_FoxEditor_Outside", true)]
+    [MenuItem("Assets/foxTools/Add\\Update_FoxEditor_Outside", true)]
     private static bool FoxEditorScriptValidation()
     {
         // This returns true when the selected object is an _C# (the menu item will be disabled otherwise).

@@ -55,7 +55,7 @@ public class LookAtCameraEditor : FoxEditor
         useCustomCamera = serializedObject.FindProperty("useCustomCamera");
         _camera = serializedObject.FindProperty("_camera");
         foxManager = serializedObject.FindProperty("foxManager");
-        foxTools = serializedObject.FindProperty("FoxTools");
+        foxTools = serializedObject.FindProperty("foxTools");
         gameplayData = serializedObject.FindProperty("gameplayData");
         mainCamera = serializedObject.FindProperty("mainCamera");
         gameState = serializedObject.FindProperty("gameState");

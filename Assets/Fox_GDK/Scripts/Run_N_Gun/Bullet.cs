@@ -91,7 +91,7 @@ public class Bullet : FoxObject
             transform.position += bulletData.bulletSpeed * Time.fixedDeltaTime * transform.forward;
             if ((startingPosition - transform.position).magnitude >= bulletData.travelLength)
             {
-                FoxTools.poolManager.Destroy(gameObject);
+                foxTools.poolManager.Destroy(gameObject);
             }
         }
         else if (weaponType.Equals(Fox_WeaponType.MELEE))
@@ -99,7 +99,7 @@ public class Bullet : FoxObject
             bulletData.travelLength -= bulletData.bulletSpeed;
             if (bulletData.travelLength <= 0)
             {
-                FoxTools.poolManager.Destroy(gameObject);
+                foxTools.poolManager.Destroy(gameObject);
             }
         }
     }
@@ -113,9 +113,25 @@ public class Bullet : FoxObject
             return;
 
         collider.enabled = false;
+        //EnemyController enemyController = other.GetComponent<EnemyController>();
+        //if (enemyController != null)
+        //{
+        //    enemyController.health.OnLooseHealth?.Invoke(bulletData.bulletDefaultDamage + bulletData.bulletAdditionalDamage, this);
+
+        //    if (bulletData.onHitParticle)
+        //        foxTools.poolManager.Instantiate(bulletData.onHitParticle.gameObject,
+        //            transform.position, Quaternion.identity,
+        //            null,
+        //            ConstantManager.ONE_HALF_TIME);
+        //    if (bulletData.onHitSoundClip)
+        //    {
+        //        audioSource.Play();
+        //    }
+
+        //}
         vfx.SetActive(false);
         bulletTrail.SetActive(false);
-        FoxTools.poolManager.Destroy(gameObject);
+        foxTools.poolManager.Destroy(gameObject);
     }
 
     #endregion ALL UNITY FUNCTIONS
@@ -126,7 +142,7 @@ public class Bullet : FoxObject
     {
         base.OnGameOver();
 
-        FoxTools.poolManager.Destroy(gameObject);
+        foxTools.poolManager.Destroy(gameObject);
     }
 
     #endregion ALL OVERRIDING FUNCTIONS

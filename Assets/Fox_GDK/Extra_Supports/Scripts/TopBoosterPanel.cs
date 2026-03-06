@@ -51,7 +51,7 @@ public class TopBoosterPanel : BaseGameBehaviour
 
     private void Update_Visuals()
     {
-        FoxTools.functionManager.ExecuteAfterWaiting(0.1f, () =>
+        foxTools.functionManager.ExecuteAfterWaiting(0.1f, () =>
         {
             vipTopText.text = $"{gameplayData.goalRemaining}";
             shuffleTopText.text = $"{gameplayData.hammerRemaining}";

@@ -94,10 +94,10 @@ public class Health : FoxObject
         health = Mathf.Clamp(health - Mathf.Abs(value), 0, health);
         if (showDamageText)
         {
-            GameObject go = FoxTools.poolManager.Instantiate(damageTextPrefab, Vector3.zero, Quaternion.identity, damageTextHolder);
+            GameObject go = foxTools.poolManager.Instantiate(damageTextPrefab, Vector3.zero, Quaternion.identity, damageTextHolder);
             TMP_Text damageText = go.transform.GetChild(0).GetComponent<TMP_Text>();
             damageText.text = $"-{Mathf.Abs(value)}";
-            FoxTools.poolManager.Destroy(go, 2);
+            foxTools.poolManager.Destroy(go, 2);
         }
         UpdateVisuals();
         if (health == 0)

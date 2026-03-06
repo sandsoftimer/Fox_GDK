@@ -3,6 +3,7 @@ using UnityEngine;
 public class PlayerController : BaseGameBehaviour
 {
     public GameObject booste_3D_Prefab;
+    public Transform shooterHolder;
 
     internal Booste_3D_Controller booste_3D_Controller;
 
@@ -28,6 +29,12 @@ public class PlayerController : BaseGameBehaviour
 
     void Update()
     {
+#if UNITY_EDITOR
+        if (Input.GetMouseButtonDown(1))
+        {
+            gameManager.GameOver(true);
+        }
+#endif
         if (gameState.Equals(GameState.GAME_INITIALIZED) && Input.GetMouseButtonDown(0))
         {
             gameManager.ChangeGameState(GameState.GAME_PLAY_STARTED);
@@ -37,12 +44,7 @@ public class PlayerController : BaseGameBehaviour
         if (!gameState.Equals(GameState.GAME_PLAY_STARTED))
             return;
 
-#if UNITY_EDITOR
-        if (Input.GetMouseButtonDown(1))
-        {
-            gameManager.GameOver(true);
-        }
-#endif
+
     }
 
     #endregion ALL UNITY FUNCTIONS

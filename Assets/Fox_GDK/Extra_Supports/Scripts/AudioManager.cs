@@ -6,9 +6,9 @@ public class AudioManager : MonoBehaviour
 
     public BackgroundAudioController backgroundAudioController;
 
-    [Header("Game Specific Sounds")]
-    public AudioSource redAlertSource;
-    public AudioSource slowDownSource, speedUpSource;
+    public AudioSource hugeWaveSource, readySetSource, shootSource, elementSelectSource, elementCollectionSource;
+    public AudioSource zombieDead, zombieAngry, giftBoxPopup, rewardThrow, redAlartSource, tuupSource, explosionSource;
+    public AudioSource iceActivatedSource, iceDeactivated, slowDownSource, speedUpSource;
 
     [Space]
     public AudioSource activityTapSound;

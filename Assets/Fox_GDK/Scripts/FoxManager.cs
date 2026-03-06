@@ -1,29 +1,28 @@
-﻿using Com.FunFox.Utility;
+﻿using Cinemachine;
+using Com.FunFox.Utility;
 using DG.Tweening;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
-using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Purchasing;
-using UnityEngine.UI;
 
 [DefaultExecutionOrder(ConstantManager.FoxManagerOrder)]
 public class FoxManager : MonoBehaviour, IHierarchyIcon
 {
-    public static Action<PurchaseEventArgs, Product_ID> OnInAppPurchasedDone;
+    public static Action<PurchaseEventArgs, Product_ID> OnInAppPurchsedDone;
     public static Action<Booster_Item> OnBoosterPurchased;
     public static Action<Booster_Item> OnBoosterCanceled;
-    public static Action<Booster_Item> OnBoosterReimplemented;
+    public static Action<Booster_Item> OnBoosterPreimplemented;
     public static Action<Booster_Item> OnBoosterImplemented;
     public static Action<Booster_Item> OnBoosterClickedWhileBusy;
 
     public static Action OnReviveGame;
 
-    public static Action<FoxObject> OnAddFoxBehavior;
+    public static Action<FoxObject> OnAddFoxBehaviour;
     public static Action<GameState> OnChangeGameState;
     public static Action OnGameInitialize;
     public static Action OnGameStart;
@@ -35,7 +34,7 @@ public class FoxManager : MonoBehaviour, IHierarchyIcon
 
     public static Action<Fox_TappingType, Vector3> OnTap;
     public static Action<Vector3> OnDrag;
-    public static Action<Fox_SwippingType> OnSwipe;
+    public static Action<Fox_SwippingType> OnSwip;
     public static Action<float> OnZoom;
 
     public GameplayData gameplayData = new GameplayData();
@@ -43,16 +42,12 @@ public class FoxManager : MonoBehaviour, IHierarchyIcon
     public TextMeshProUGUI levelText;
     public Fox_Canvas_Animator allButtonsUI, gameStartingUI, gamePlayUI, gameSuccessUI, gameFaildUI, gameCustomUI;
 
-
     [Space]
     public float cam_Focus_Distance = 45;
 
     [Space]
     public CurrencySystem currencyMainSystem;
     public Popup_Controller retryPopupController;
-
-    public Image screenDamageBorder;
-    Coroutine redAlartRoutine;
 
     [Header("==================")]
     public bool debugModeOn;
@@ -69,7 +64,6 @@ public class FoxManager : MonoBehaviour, IHierarchyIcon
     [ReadOnlyProperty] public Tutorial_View tutorial_View;
     [ReadOnlyProperty] public Mask_Manager maskManager;
     [ReadOnlyProperty] public ConstantManager constantManager;
-    [ReadOnlyProperty] public SaturationManager saturationManager;
     [ReadOnlyProperty] public bool centerInputDetector;
 
     [HideInInspector] public int totalGivenTask = 0, totalCompletedTask = 0, totalIncompleteTask = 0;
@@ -83,12 +77,12 @@ public class FoxManager : MonoBehaviour, IHierarchyIcon
 
     private void OnEnable()
     {
-        OnAddFoxBehavior += AddFoxBehaviour;
+        OnAddFoxBehaviour += AddFoxBehaviour;
     }
 
     private void OnDisable()
     {
-        OnAddFoxBehavior -= AddFoxBehaviour;
+        OnAddFoxBehaviour -= AddFoxBehaviour;
     }
 
     public virtual void Awake()
@@ -152,7 +146,7 @@ public class FoxManager : MonoBehaviour, IHierarchyIcon
     }
     public virtual void ProcessSwipping(Fox_SwippingType swippingType)
     {
-        OnSwipe?.Invoke(swippingType);
+        OnSwip?.Invoke(swippingType);
     }
     public virtual void ProcessZooming(float zoom)
     {
@@ -324,32 +318,6 @@ public class FoxManager : MonoBehaviour, IHierarchyIcon
 
     #region COMMON_GAME_FUNCTIONALITIES
 
-    public void Start_Red_Alert()
-    {
-        if (redAlartRoutine == null)
-            redAlartRoutine = StartCoroutine(Redline_Enemy_Feedback());
-    }
-
-    public void Stop_Red_Alert()
-    {
-        if (redAlartRoutine != null)
-        {
-            StopCoroutine(redAlartRoutine);
-        }
-        redAlartRoutine = null;
-    }
-
-    IEnumerator Redline_Enemy_Feedback()
-    {
-        screenDamageBorder.color = constantManager.noColor;
-        while (true)
-        {
-            yield return screenDamageBorder.DOColor(constantManager.redColor, ConstantManager.ONE_FORTH_TIME).WaitForCompletion();
-            AudioManager.instance.redAlertSource.Play();
-            yield return screenDamageBorder.DOColor(constantManager.noColor, ConstantManager.ONE_FORTH_TIME).WaitForCompletion();
-        }
-    }
-
     public void Dragging_On()
     {
         centerInputDetector = true;
@@ -396,7 +364,7 @@ public class FoxManager : MonoBehaviour, IHierarchyIcon
     public virtual void BoosterPreImplemented(Booster_Item booster_Item)
     {
         booster_Item.COUNT--;
-        OnBoosterReimplemented?.Invoke(booster_Item);
+        OnBoosterPreimplemented?.Invoke(booster_Item);
     }
 
     public virtual void BoosterImplemented(Booster_Item booster_Data)
@@ -406,7 +374,7 @@ public class FoxManager : MonoBehaviour, IHierarchyIcon
 
     public virtual void IAP_Purchase_Done(PurchaseEventArgs purchaseEventArgs, Product_ID product_ID)
     {
-        OnInAppPurchasedDone?.Invoke(purchaseEventArgs, product_ID);
+        OnInAppPurchsedDone?.Invoke(purchaseEventArgs, product_ID);
     }
 
     public void Send_Custom_Event(string eventName)

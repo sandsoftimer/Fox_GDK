@@ -1,5 +1,4 @@
 using DG.Tweening;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Tutorial_Hand_Controller : MonoBehaviour
@@ -17,7 +16,7 @@ public class Tutorial_Hand_Controller : MonoBehaviour
         if (hidingCanvas)
         {
             Cursor.visible = false;
-            hidingCanvas.AddComponent<CanvasGroup>().alpha = 0;
+            hidingCanvas.gameObject.AddComponent<CanvasGroup>().alpha = 0;
         }
 
 

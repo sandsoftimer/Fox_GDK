@@ -88,7 +88,7 @@ public class Combo_Controller : BaseGameBehaviour
         vfxImage.gameObject.SetActive(true);
 
         float direction = fadingHeight * Random.Range(0, 2) == 0 ? 1 : -1f;
-        //FoxTools.cameraManager.ShakeDefaultCamera();
+        //foxTools.cameraManager.ShakeDefaultCamera();
         direction = fadingHeight;
 
         vfxImage.transform.eulerAngles = Random.Range(0, 2) == 0 ? new Vector3(0, 0, -45) : new Vector3(0, 0, 45);

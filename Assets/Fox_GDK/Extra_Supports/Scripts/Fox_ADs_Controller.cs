@@ -105,7 +105,7 @@ public class Fox_ADs_Controller : BaseGameBehaviour
             LionAds.TryShowRewarded(rewardName, () => OnRewarded?.Invoke(true), () => OnRewardedAdClosed(), GetTestReward());
 #else
         //LionAds.TryShowRewarded(rewardName, () => OnRewarded?.Invoke(true), () => OnRewardedAdClosed(), GetTestReward());
-        FoxTools.functionManager.ExecuteAfterWaiting(ConstantManager.ONE_FORTH_TIME, () => { OnRewarded?.Invoke(true); });
+        foxTools.functionManager.ExecuteAfterWaiting(ConstantManager.ONE_FORTH_TIME, () => { OnRewarded?.Invoke(true); });
 #endif
     }
 

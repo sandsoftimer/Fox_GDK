@@ -1,9 +1,6 @@
 #if UNITY_EDITOR
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.IO;
-using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using Object = UnityEngine.Object;
@@ -87,7 +84,7 @@ public static class FoxToolsMenuItems
         GameObject variantPrefab = PrefabUtility.SaveAsPrefabAsset(instance, variantPath);
 
         // Step 5: Instantiate variant into hierarchy
-        GameObject variantInstance = PrefabUtility.InstantiatePrefab(variantPrefab, Selection.activeObject.GameObject().transform) as GameObject;
+        GameObject variantInstance = PrefabUtility.InstantiatePrefab(variantPrefab, Selection.activeGameObject.transform) as GameObject;
         if (variantInstance != null)
         {
             Undo.RegisterCreatedObjectUndo(variantInstance, "Create Prefab Variant");
@@ -102,7 +99,7 @@ public static class FoxToolsMenuItems
 
 
     // Add menu item when right-clicking in the Hierarchy
-    [MenuItem("GameObject/FoxTools/UI Holder Variant", false, 10)]
+    [MenuItem("GameObject/foxTools/UI Holder Variant", false, 10)]
     private static void CreateCustomObject(MenuCommand menuCommand)
     {
         CreatePrefabVariant();

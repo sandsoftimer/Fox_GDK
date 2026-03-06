@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using UnityEngine;
 
@@ -23,6 +24,18 @@ public class Tutorial_View : BaseGameBehaviour
     [Space]
     public GameObject dockTutorialHolder;
     public GameObject dockBooster;
+
+    [Space]
+    public GameObject iceTutorialHolder;
+    public GameObject snailTutorialHolder;
+    public GameObject explosionTutorialHolder;
+
+
+    [ReadOnlyProperty] public bool showMatch3HandTutorial;
+    bool iceUsed;
+    bool snailUsed;
+    bool explosionUsed;
+    bool alreadyUnlockedMagnet;
 
     #region ALL UNITY FUNCTIONS
 
@@ -114,7 +127,6 @@ public class Tutorial_View : BaseGameBehaviour
         gameManager.gamePlayUI.Set_Visual(true);
         gameManager.allButtonsUI.Set_Visual(true);
     }
-
     public override void OnGameOver()
     {
         base.OnGameOver();
@@ -126,11 +138,6 @@ public class Tutorial_View : BaseGameBehaviour
     //=================================
     #region ALL SELF DECLARE FUNCTIONS
 
-    bool Check_If_Tutorial_Needed()
-    {
-        return false;
-    }
-
     public void Start_Game_Or_Tutorial()
     {
         gameManager.ChangeGameState(GameState.GAME_PLAY_STARTED);
@@ -138,6 +145,123 @@ public class Tutorial_View : BaseGameBehaviour
         {
             StartCoroutine(Start_Level_1_Tutorial());
         }
+        else if (gameplayData.currentLevelNumber == gameManager.constantManager.ICE_BOOSTER_UNLOCK)
+        {
+            StartCoroutine(Start_ICE_Tutorial());
+        }
+        else if (gameplayData.currentLevelNumber == gameManager.constantManager.SNAIL_BOOSTER_UNLOCK)
+        {
+            StartCoroutine(Start_SNAIL_Tutorial());
+        }
+        else if (gameplayData.currentLevelNumber == gameManager.constantManager.EXPLOSION_BOOSTER_UNLOCK)
+        {
+            StartCoroutine(Start_EXPLOSION_Tutorial());
+        }
+    }
+
+    IEnumerator Start_ICE_Tutorial()
+    {
+        int currentIndex = 0;
+
+    FETCH_NEXT:
+        iceTutorialHolder.SetActive(true);
+        UI_Hole_Data uI_Hole_Data = iceTutorialHolder.transform.FOXE_ActiveChild(currentIndex).GetComponent<UI_Hole_Data>();
+        uI_Hole_Data.transform.localScale = new Vector3(0, 1, 1);
+
+        yield return new WaitForSeconds(ConstantManager.DEFAULT_ANIMATION_TIME + ConstantManager.ONE_FORTH_TIME * currentIndex + 1);
+
+        gameManager.maskManager.Initialize_Next_Masking(uI_Hole_Data);
+        uI_Hole_Data.transform.DOScale(Vector3.one, ConstantManager.ONE_HALF_TIME);
+
+        yield return new WaitUntil(() => iceUsed);
+
+        gameManager.maskManager.Set_Off_Mask();
+        uI_Hole_Data.gameObject.SetActive(false);
+        yield return null;
+
+        currentIndex++;
+        if (currentIndex < iceTutorialHolder.transform.childCount)
+        {
+            goto FETCH_NEXT;
+        }
+
+        iceTutorialHolder.SetActive(false);
+        gameManager.maskManager.Set_Off_Mask();
+        gameObject.SetActive(false);
+    }
+
+    IEnumerator Start_SNAIL_Tutorial()
+    {
+        int currentIndex = 0;
+
+    FETCH_NEXT:
+        snailTutorialHolder.SetActive(true);
+        UI_Hole_Data uI_Hole_Data = snailTutorialHolder.transform.FOXE_ActiveChild(currentIndex).GetComponent<UI_Hole_Data>();
+        uI_Hole_Data.transform.localScale = new Vector3(0, 1, 1);
+
+        yield return new WaitForSeconds(ConstantManager.DEFAULT_ANIMATION_TIME + ConstantManager.ONE_FORTH_TIME * currentIndex + 1);
+
+        gameManager.maskManager.Initialize_Next_Masking(uI_Hole_Data);
+        uI_Hole_Data.transform.DOScale(Vector3.one, ConstantManager.ONE_HALF_TIME);
+
+        yield return new WaitUntil(() => snailUsed);
+
+        gameManager.maskManager.Set_Off_Mask();
+        uI_Hole_Data.gameObject.SetActive(false);
+        yield return null;
+
+        currentIndex++;
+        if (currentIndex < snailTutorialHolder.transform.childCount)
+        {
+            goto FETCH_NEXT;
+        }
+
+        snailTutorialHolder.SetActive(false);
+        gameManager.maskManager.Set_Off_Mask();
+        gameObject.SetActive(false);
+    }
+
+    IEnumerator Start_EXPLOSION_Tutorial()
+    {
+        int currentIndex = 0;
+
+    FETCH_NEXT:
+        explosionTutorialHolder.SetActive(true);
+        UI_Hole_Data uI_Hole_Data = explosionTutorialHolder.transform.FOXE_ActiveChild(currentIndex).GetComponent<UI_Hole_Data>();
+        uI_Hole_Data.transform.localScale = new Vector3(0, 1, 1);
+
+        yield return new WaitForSeconds(ConstantManager.DEFAULT_ANIMATION_TIME + ConstantManager.ONE_FORTH_TIME * currentIndex + 1);
+
+        gameManager.maskManager.Initialize_Next_Masking(uI_Hole_Data);
+        uI_Hole_Data.transform.DOScale(Vector3.one, ConstantManager.ONE_HALF_TIME);
+
+        yield return new WaitUntil(() => explosionUsed);
+
+        gameManager.maskManager.Set_Off_Mask();
+        uI_Hole_Data.gameObject.SetActive(false);
+        yield return null;
+
+        currentIndex++;
+        if (currentIndex < explosionTutorialHolder.transform.childCount)
+        {
+            goto FETCH_NEXT;
+        }
+
+        explosionTutorialHolder.SetActive(false);
+        gameManager.maskManager.Set_Off_Mask();
+        gameObject.SetActive(false);
+    }
+
+    private bool Check_If_Tutorial_Needed()
+    {
+        bool result = false;
+
+        result = gameplayData.currentLevelNumber == gameManager.constantManager.BASIC_TUTORIAL_LEVEL - 1
+            || gameplayData.currentLevelNumber == gameManager.constantManager.ICE_BOOSTER_UNLOCK
+            || gameplayData.currentLevelNumber == gameManager.constantManager.SNAIL_BOOSTER_UNLOCK
+            || gameplayData.currentLevelNumber == gameManager.constantManager.EXPLOSION_BOOSTER_UNLOCK;
+
+        return result;
     }
 
     IEnumerator Start_Dock_Booster_Tutorial()
@@ -181,6 +305,7 @@ public class Tutorial_View : BaseGameBehaviour
 
     IEnumerator Start_Level_1_Tutorial()
     {
+        showMatch3HandTutorial = false;
         level_1_tutorial_Holder.transform.FOXE_ActiveChild(-1);
         gameManager.maskManager.Set_Off_Mask();
         int currentIndex = 0;
@@ -188,6 +313,7 @@ public class Tutorial_View : BaseGameBehaviour
         yield return new WaitForSeconds(ConstantManager.DEFAULT_ANIMATION_TIME);
 
     FETCH_NEXT:
+        showMatch3HandTutorial = false;
         UI_Hole_Data uI_Hole_Data = level_1_tutorial_Holder.transform.FOXE_ActiveChild(currentIndex).GetComponent<UI_Hole_Data>();
         uI_Hole_Data.transform.localScale = new Vector3(0, 1, 1);
 
@@ -195,6 +321,24 @@ public class Tutorial_View : BaseGameBehaviour
             yield return new WaitForSeconds(ConstantManager.DEFAULT_ANIMATION_TIME + ConstantManager.ONE_FORTH_TIME * currentIndex + 1);
 
         gameManager.maskManager.Initialize_Next_Masking(uI_Hole_Data);
+        uI_Hole_Data.transform.DOScale(Vector3.one, ConstantManager.ONE_HALF_TIME).OnComplete(() =>
+        {
+            if (currentIndex > 0)
+                showMatch3HandTutorial = true;
+        });
+
+
+        if (currentIndex > 0)
+        {
+            yield return new WaitUntil(() => Get_Collection_Complete());
+        }
+        else yield return new WaitUntil(() => Input.GetMouseButtonDown(0) || Time_Out());
+
+        showMatch3HandTutorial = false;
+        if (currentIndex != 0)
+            gameManager.maskManager.Set_Off_Mask();
+        uI_Hole_Data.gameObject.SetActive(false);
+        yield return null;
 
         currentIndex++;
         if (currentIndex < level_1_tutorial_Holder.transform.childCount)
@@ -205,6 +349,13 @@ public class Tutorial_View : BaseGameBehaviour
         level_1_tutorial_Holder.SetActive(false);
         gameManager.maskManager.Set_Off_Mask();
         gameObject.SetActive(false);
+    }
+
+    float distanceCrossed = 3;
+    bool Time_Out()
+    {
+        distanceCrossed -= Time.deltaTime;
+        return distanceCrossed <= 0;
     }
 
     bool collectionComplete;

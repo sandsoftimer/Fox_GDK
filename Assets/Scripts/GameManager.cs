@@ -18,16 +18,14 @@ public class GameManager : FoxManager
             case Fox_SceneLooping_Type.SCENE_LOOPING:
                 break;
         }
-        gameCustomUI.Set_Visual(true);
+        gameStartingUI.Set_Visual(true);
     }
 
     public override void Start()
     {
         base.Start();
 
-        playerController.Initialize();
-
-        tutorial_View.Start_Game_Or_Tutorial();
+        //tutorial_View.Start_Game_Or_Tutorial();
     }
 
     public override void GameStart()
@@ -35,8 +33,6 @@ public class GameManager : FoxManager
         base.GameStart();
 
         gameStartingUI.Set_Visual(false);
-        gamePlayUI.Set_Visual(true);
-        allButtonsUI.Set_Visual(true);
     }
 
     public override void GameOver()
@@ -54,4 +50,6 @@ public class GameManager : FoxManager
             gameFaildUI.Set_Visual(true);
         }
     }
+
+
 }

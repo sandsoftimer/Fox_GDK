@@ -6,7 +6,7 @@ class FoxAutoSupportClass
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     static void OnBeforeSceneLoadRuntimeMethod()
     {
-        GameObject.Instantiate(Resources.Load("FoxTools") as GameObject).name = "FoxTools";
+        GameObject.Instantiate(Resources.Load("foxTools") as GameObject).name = "foxTools";
     }
 
 }

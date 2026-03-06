@@ -29,7 +29,7 @@ public class LevelSelection : BaseGameBehaviour
         }
 
         float animationCallingTime = gameplayData.currentLevelNumber == 0 ? 0 : ConstantManager.ONE_FORTH_TIME + 0.5f;
-        FoxTools.functionManager.ExecuteAfterWaiting(animationCallingTime, MakeTransition);
+        foxTools.functionManager.ExecuteAfterWaiting(animationCallingTime, MakeTransition);
     }
 
     void MakeTransition()
@@ -44,7 +44,7 @@ public class LevelSelection : BaseGameBehaviour
             numberPaltes[i].transform.DOLocalMove(numberPaltes[i].transform.localPosition.FOXE_ModifyThisVector(0, -gap, 0), transitionTime).SetEase(Ease.InBack);
         }
 
-        FoxTools.functionManager.ExecuteAfterWaiting(0.5f, () =>
+        foxTools.functionManager.ExecuteAfterWaiting(0.5f, () =>
         {
             if (!gameState.Equals(GameState.GAME_PLAY_STARTED) && numberPaltes[1].isActiveAndEnabled)
                 StartCoroutine(numberPaltes[1].Unlock_Effect());

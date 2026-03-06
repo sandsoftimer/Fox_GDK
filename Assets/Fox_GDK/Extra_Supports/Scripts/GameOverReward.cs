@@ -55,7 +55,7 @@ public class GameOverReward : BaseGameBehaviour
         if (gameplayData.gameoverSuccess)
         {
             successLevelText.text = $"Level {gameplayData.currentLevelNumber}";
-            FoxTools.functionManager.ExecuteAfterWaiting(ConstantManager.ONE_HALF_TIME, () =>
+            foxTools.functionManager.ExecuteAfterWaiting(ConstantManager.ONE_HALF_TIME, () =>
             {
                 view.gameObject.SetActive(true);
                 anim.SetBool("Hide", false);
@@ -111,6 +111,7 @@ public class GameOverReward : BaseGameBehaviour
 
         });
     }
+
     public void OnTakenRewardAmount()
     {
         SaveGame();

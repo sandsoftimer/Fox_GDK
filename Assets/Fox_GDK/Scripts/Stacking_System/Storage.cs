@@ -209,7 +209,7 @@ public class Storage : FoxObject
             {
                 transitioning--;
                 if (vanishAfterCollect)
-                    FoxTools.poolManager.Destroy(obj.gameObject);
+                    foxTools.poolManager.Destroy(obj.gameObject);
             };
             transitResource.TransitThisResource(obj, parabolaMove);
             OnResourceUpdate?.Invoke(this, obj.gameObject);
@@ -258,7 +258,7 @@ public class Storage : FoxObject
     {
         while (!IS_EMPTY)
         {
-            FoxTools.poolManager.Destroy(Release_A_Stack_Top_Resource());
+            foxTools.poolManager.Destroy(Release_A_Stack_Top_Resource());
         }
 
         if (alsoStorageTypeClear)

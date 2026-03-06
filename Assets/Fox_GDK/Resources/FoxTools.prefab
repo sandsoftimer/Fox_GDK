@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   foxManager: {fileID: 0}
-  FoxTools: {fileID: 0}
+  foxTools: {fileID: 0}
   gameplayData:
     numberOfSlot: 5
     hammerRemaining: 0
@@ -68,9 +68,6 @@ MonoBehaviour:
     reviveAttemptNumber: 1
     softFailAttemptNumber: 1
     commonAttempt: 1
-    remainningIces: 0
-    remainningSnails: 0
-    remainningExplosion: 0
     gameStartTime: 0
     gameEndTime: 0
     totalLevelCompletedTime: 0
@@ -1295,7 +1292,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   foxManager: {fileID: 0}
-  FoxTools: {fileID: 0}
+  foxTools: {fileID: 0}
   gameplayData:
     numberOfSlot: 2
     hammerRemaining: 0
@@ -1318,9 +1315,6 @@ MonoBehaviour:
     reviveAttemptNumber: 1
     softFailAttemptNumber: 1
     commonAttempt: 1
-    remainningIces: 0
-    remainningSnails: 0
-    remainningExplosion: 0
     gameStartTime: 0
     gameEndTime: 0
     totalLevelCompletedTime: 0
@@ -2062,7 +2056,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   foxManager: {fileID: 0}
-  FoxTools: {fileID: 0}
+  foxTools: {fileID: 0}
   gameplayData:
     numberOfSlot: 5
     hammerRemaining: 0
@@ -2085,9 +2079,6 @@ MonoBehaviour:
     reviveAttemptNumber: 1
     softFailAttemptNumber: 1
     commonAttempt: 1
-    remainningIces: 0
-    remainningSnails: 0
-    remainningExplosion: 0
     gameStartTime: 0
     gameEndTime: 0
     totalLevelCompletedTime: 0

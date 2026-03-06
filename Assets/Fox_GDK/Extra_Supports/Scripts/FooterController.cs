@@ -57,7 +57,7 @@ public class FooterController : BaseGameBehaviour
                     break;
             }
         }
-        FoxTools.functionManager.ExecuteAfterWaiting(0.1f, () => OnPressTab(1));
+        foxTools.functionManager.ExecuteAfterWaiting(0.1f, () => OnPressTab(1));
     }
 
     void Update()

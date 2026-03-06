@@ -58,7 +58,7 @@ public class TransitResource : FoxObject
             actionAfterTransition?.Invoke();
             if (vanishAfterTransit)
             {
-                FoxTools.poolManager.Destroy(resource.gameObject);
+                foxTools.poolManager.Destroy(resource.gameObject);
             }
         }).SetEase(Ease.OutQuad);
     }

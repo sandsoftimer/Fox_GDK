@@ -5,26 +5,14 @@ EditorUserSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 4
   m_ConfigSettings:
-    GraphicsSettingsInspector_UserSettings:
-      value: 18134705175a055722080a3115371d4a0d55006876786860616b0471b8b07a68ffab74f9ee2a3a30300cea1a11320d0beb1a0c25f7060f494b4cdf1b18f3045e38cb5ad8
-      flags: 0
     RecentlyUsedSceneGuid-0:
       value: 51010d0050065c5e0e08557646770d414f164f722e2d7e322e2c1e66b4e3656c
       flags: 0
     RecentlyUsedSceneGuid-1:
-      value: 0754005f04505a0f5c0c0a26112109441216402b742d71647b2f4b61e7e5656c
+      value: 0104575603075d095a0d5b7315710744404f4b727e7c7f657c714b35e3b6316c
       flags: 0
     RecentlyUsedSceneGuid-2:
-      value: 5a0057055504505f5a5c592644210c4412151b78287d77352b2d4b60e1e4646e
-      flags: 0
-    RecentlyUsedSceneGuid-3:
-      value: 5308525501060a0e5a5f0a7b13730a44404e1e2b752c74652f2f4b37b1b7313a
-      flags: 0
-    RecentlyUsedSceneGuid-4:
       value: 0107055451070d0f0b5b5e2311220b4415161a2b2d792336742f4b37b2b56c3d
-      flags: 0
-    lightmappingBakingProfile:
-      value: 51
       flags: 0
     vcSharedLogLevel:
       value: 0d5e400f0650
@@ -45,4 +33,3 @@ EditorUserSettings:
   m_VCAllowAsyncUpdate: 1
   m_VCScanLocalPackagesOnConnect: 1
   m_ArtifactGarbageCollection: 1
-  m_CompressAssetsOnImport: 1

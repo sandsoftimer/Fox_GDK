@@ -36,7 +36,7 @@ public class OffScreenHandlerEditor : FoxEditor
         offScreenUIIndicatorPrefab = serializedObject.FindProperty("offScreenUIIndicatorPrefab");
         canvasParent = serializedObject.FindProperty("canvasParent");
         //gameManager = serializedObject.FindProperty("gameManager");
-        //KolpoTools = serializedObject.FindProperty("FoxTools");
+        //KolpoTools = serializedObject.FindProperty("foxTools");
         //gameplayData = serializedObject.FindProperty("gameplayData");
         //gameState = serializedObject.FindProperty("gameState");
         #endregion FINDER_ALL_PUBLIC_PROPERTIES
